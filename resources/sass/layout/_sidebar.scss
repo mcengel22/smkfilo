@@ -1,0 +1,513 @@
+@use "../variable" as *;
+.sidebar {
+    margin-bottom: 1rem;
+    h4 {
+        font-weight: 700;
+        font-size: 1rem;
+        color: $primary;
+    }
+    .card {
+        border-radius: 12px;
+        padding: 12px 24px 12px 15px;
+        border: none;
+        background-color: $white;
+        margin-bottom: 1rem;
+        .card-title {
+            margin-bottom: 0.5rem;
+            .icon {
+                margin-right: 0.5rem;
+                &:before {
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    background-color: $primary;
+                }
+            }
+        }
+        .checks-item-main {
+            i {
+                &:before {
+                    background-color: $primary;
+                }
+            }
+            padding-left: 0.2rem;
+        }
+        .card-body {
+            padding: 0;
+            li {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+            }
+            .form-check {
+                border-radius: 8px;
+                label {
+                    font-size: 0.875rem;
+                    font-weight: 600;
+                    color: #4a5568;
+                    letter-spacing: 0.44px;
+                    cursor: pointer;
+                }
+                .form-check-input {
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    border-color: #e2e8f0;
+                    &:checked {
+                        background-color: $primary;
+                    }
+                    &:focus {
+                        box-shadow: none;
+                    }
+                }
+            }
+            .scroll {
+                overflow: auto;
+                max-height: 200px;
+                padding: 0px 0.3rem;
+                height: auto;
+            }
+            .feature {
+                margin-bottom: 1rem;
+                span {
+                    color: $orange;
+                    font-size: 1rem;
+                    font-weight: 700;
+                }
+                .icon {
+                    // margin-right: 0.5rem;
+                    &:before {
+                        background-color: $orange;
+                        width: 1.4rem;
+                        height: 1.4rem;
+                        margin-right: 0.2rem;
+                    }
+                }
+            }
+        }
+        .room-review,
+        .price-filter {
+            li {
+                display: flex;
+                align-items: center;
+                span {
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    color: #4a5568;
+                    // letter-spacing: 0.44px;
+                }
+                .icon {
+                    margin-right: 0.5rem;
+                    &:before {
+                        width: 1.1rem;
+                        height: 1.1rem;
+                        background-color: $primary;
+                    }
+                }
+                input {
+                    border-radius: 8px;
+                    border: 2px solid #e2e8f0;
+                    padding: 0.3rem 0.2rem;
+                    width: 150px;
+                    // min-height: 30px;
+                    &:active,
+                    &:focus {
+                        border-color: $orange;
+                        outline: 0;
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            input {
+                border-radius: 8px;
+                border: 2px solid #e2e8f0;
+                padding: 0.3rem;
+                width: auto;
+                width: 100%;
+                margin-right: 0.3rem;
+                font-weight: 600;
+                color: #4a5568;
+                font-size: 0.9rem;
+                // background-color: $white;
+                &:active,
+                &:focus {
+                    border-color: $orange;
+                    outline: 0;
+                }
+            }
+            .search-btn {
+                background-color: $orange;
+                padding: 0.5rem;
+                .icon {
+                    &:before {
+                        background-color: $white;
+                    }
+                }
+            }
+        }
+    }
+}
+.filter-button,
+.search-button,
+.arrangement-button {
+    display: none;
+}
+
+.open-sidebar {
+    @media (min-width: 992px) {
+        display: block !important;
+    }
+    .sidebar-footer {
+        display: none;
+    }
+    .sidebar-header {
+        display: none;
+        padding: 0.5rem 1.8rem;
+        position: relative;
+    }
+}
+.open-filter {
+    @media (min-width: 992px) {
+        display: block !important;
+    }
+}
+.openSearch {
+    @media (min-width: 992px) {
+        display: block !important;
+    }
+    .sidebar-footer {
+        display: none;
+    }
+    .search-header {
+        display: none;
+        padding: 0.5rem 1.8rem;
+        position: relative;
+    }
+}
+@media (max-width: 992px) {
+    .filter-button,
+    .search-button,
+    .arrangement-button {
+        display: block;
+        top: 10px;
+        right: 10px;
+        background-color: $tertiary;
+        color: white;
+        padding: 10px 30px;
+        border: none;
+        font-weight: 700;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+    }
+    .open-filter {
+        display: none;
+        position: fixed;
+        z-index: 99999;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: calc(100% - 8rem);
+        background-color: rgb(247, 247, 247);
+        z-index: 1000;
+        border-radius: 12px 12px 0px 0px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    .open-sidebar {
+        display: none;
+        position: fixed;
+        z-index: 99999;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: calc(100% - 8rem);
+        background-color: rgb(247, 247, 247);
+        z-index: 1000;
+        border-radius: 12px 12px 0px 0px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        &.open {
+            display: block; /* Sidebar açıldığında görünür olacak */
+            transition: right 0.3s ease;
+            right: 0; /* Sağ kaydırarak açılmasını sağlıyoruz */
+        }
+        .sidebar {
+            padding: 10px 24px 12px 15px;
+            overflow-y: auto;
+            height: calc(100% - 6.5rem);
+        }
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            .close-button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                z-index: 1002;
+                display: flex;
+                align-items: center;
+                .icon {
+                    background-color: transparent;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 50%;
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0.6rem;
+                    &:before {
+                        background-color: $orange;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+                }
+                span {
+                    color: $orange;
+                    font-weight: 600;
+                    margin-left: 0.5rem;
+                }
+            }
+            span {
+                letter-spacing: 0.44px;
+                text-align: center;
+                font-weight: 700;
+                font-size: 1rem;
+                color: #1a202c;
+            }
+        }
+
+        .sidebar-footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background: rgb(247, 247, 247);
+            .action-button {
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                flex: 1;
+                margin: 0 5px;
+                line-height: 1.2;
+                border-radius: 32px;
+                font-weight: 700;
+            }
+            #clearButton {
+                background-color: #e2e8f0;
+                color: $orange;
+            }
+            #applyButton {
+                background-color: $orange;
+            }
+        }
+    }
+    .openSearch {
+        display: none;
+        position: fixed;
+        z-index: 99999;
+        bottom: 0 !important;
+        right: 0 !important;
+        top: inherit !important;
+        width: 100%;
+        background-color: rgb(247, 247, 247);
+        z-index: 1000;
+        border-radius: 12px 12px 0px 0px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        .search-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            .closeBanner {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                z-index: 1002;
+                display: flex;
+                align-items: center;
+                .icon {
+                    background-color: transparent;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 50%;
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0.6rem;
+                    &:before {
+                        background-color: $orange;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+                }
+                span {
+                    color: $orange;
+                    font-weight: 600;
+                    margin-left: 0.5rem;
+                }
+            }
+            span {
+                letter-spacing: 0.44px;
+                text-align: center;
+                font-weight: 700;
+                font-size: 1rem;
+                color: #1a202c;
+            }
+        }
+        .banner-search {
+            overflow-y: auto;
+            height: calc(100% - 6.5rem);
+            top: 10px;
+            h1 {
+                display: none;
+            }
+        }
+    }
+    .inner-page .banner {
+        height: 0 !important;
+        margin-bottom: 0 !important;
+        h1 {
+            font-weight: 700;
+            font-size: 56px;
+            color: $white;
+            line-height: 1;
+            margin-bottom: 20px;
+            span {
+                color: $orange;
+            }
+        }
+    }
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    &.open {
+        display: block;
+    }
+}
+
+@media (max-width: 992px) {
+    #openSearch {
+        display: none;
+    }
+}
+
+.sidebar-btn {
+    display: flex;
+    justify-content: center;
+    .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        color: $white;
+        font-size: 1rem;
+        font-weight: 600;
+        width: 50%;
+    }
+    .clear-btn {
+        background-color: #d22b2b;
+    }
+    .apply-btn {
+        background-color: $secondary;
+    }
+}
+
+/* Aside menu */
+.aside-area {
+    height: 100%;
+    .toggle-btn,
+    .close-btn {
+        background-color: $orange;
+        padding: 0.6rem;
+        border-radius: 0.5rem;
+        display: none;
+        .icon {
+            &:before {
+                background-color: $white;
+            }
+        }
+        @media (max-width: 992px) {
+            display: block;
+        }
+    }
+    .close-btn {
+        position: absolute;
+        right: 1rem;
+    }
+    .aside-menu {
+        background-color: $white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        padding: 0.5rem;
+        height: 100%;
+        .menu {
+            height: 100%;
+            overflow: hidden;
+            overflow-y: auto;
+            padding: 0 0.5rem;
+            @media (max-width: 992px) {
+                margin-top: 3rem;
+            }
+            .menu-item {
+                .menu-link {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    padding: 0.5rem;
+                    border-radius: 0.5rem;
+                    transition: all 0.3s;
+                    color: $text-color;
+                    &:hover {
+                        color: $primary;
+                    }
+                    .icon {
+                        &:before {
+                            width: 0.9rem;
+                            height: 0.9rem;
+                        }
+                    }
+                }
+            }
+            .menu-sub {
+                padding-left: 0.6rem !important;
+                transition: all 0.3s ease;
+            }
+        }
+        @media (max-width: 992px) {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: -250px;
+            top: 0;
+            transition: left 0.3s ease-in-out;
+            z-index: 100;
+            &.open {
+                left: 0; /* Sidebar açık olduğunda sola kayar */
+            }
+        }
+    }
+}

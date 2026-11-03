@@ -1,0 +1,30 @@
+### POST request to Campaign API
+POST http://localhost:8000/api/Campaign
+Content-Type: application/json
+
+{
+    "name": "John Doe"
+}
+
+###
+
+GET http://localhost:8000/api/campaign
+
+###
+
+GET http://localhost:8000/api/campaign/1
+
+###
+
+PUT http://localhost:8000/api/campaign/1
+Content-Type: application/json
+
+{
+    "name": "Updated John Doe"
+}
+
+###
+
+DELETE http://localhost:8000/api/campaign/1
+
+###

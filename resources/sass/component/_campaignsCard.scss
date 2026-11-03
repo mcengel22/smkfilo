@@ -1,0 +1,44 @@
+@use "../variable" as *;
+
+.campaign-card {
+  background-color: #0021f409;
+  padding: 1.25rem;
+
+  &:hover {
+    background-color: rgba(236, 121, 5, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  h6 {
+    margin-right: 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.9rem;
+    padding: 0.3rem 0.6rem; // Daha küçük bir padding
+    line-height: 0.8rem; // Daha kısa bir line-height
+    border-radius: 0.5rem; // Yuvarlama oranını da küçülttüm
+    display: inline-block;
+  }
+
+  h3 {
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  img {
+    height: 12rem;
+    width: 27rem;
+    object-fit: cover;
+    border-radius: 10px 10px 10px;
+  }
+
+  a {
+    color: #1d4ed8;
+    font-weight: 600;
+    transition: color 0.3s;
+    padding-top: 0.2rem;
+  }
+  .image-wrapper {
+    margin-top: 0.8rem;
+    height: auto;
+    margin-bottom: 0.1rem;
+  }
+}

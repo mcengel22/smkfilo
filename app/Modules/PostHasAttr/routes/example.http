@@ -1,0 +1,30 @@
+### POST request to PostHasAttr API
+POST http://localhost:8000/api/PostHasAttr
+Content-Type: application/json
+
+{
+    "name": "John Doe"
+}
+
+###
+
+GET http://localhost:8000/api/posthasattr
+
+###
+
+GET http://localhost:8000/api/posthasattr/1
+
+###
+
+PUT http://localhost:8000/api/posthasattr/1
+Content-Type: application/json
+
+{
+    "name": "Updated John Doe"
+}
+
+###
+
+DELETE http://localhost:8000/api/posthasattr/1
+
+###

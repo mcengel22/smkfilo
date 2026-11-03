@@ -1,0 +1,204 @@
+.sidebarb {
+    position: sticky;
+    top: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 12px 15px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #2f2f30;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    &:hover,
+    &.active {
+        background: #f69b1d;
+        color: #fff;
+    }
+}
+
+/* 📌 Mobilde Sidebar'ı Başlığın Altına Sabitle ve Butonları Alt Alta Diz */
+@media (max-width: 1024px) {
+    .sidebar {
+        position: relative;
+        top: 0;
+        width: 100%;
+        padding: 15px;
+        background: #f9f9f9;
+        border-radius: 0;
+        box-shadow: none;
+
+        ul {
+            display: flex;
+            flex-direction: column; /* 📌 Butonları Alt Alta Diz */
+            gap: 10px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-link {
+            display: block;
+            text-align: center;
+            padding: 12px 15px;
+            border-radius: 6px;
+            background: #ffffff;
+            color: #333;
+            font-weight: bold;
+
+            &:hover {
+                background: #f69b1d;
+                color: #fff;
+            }
+        }
+    }
+}
+
+/* 📌 Genel Sayfa Yapısı */
+.contract-page {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+
+    .page-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+    }
+
+    .content-wrapper {
+        display: flex;
+        gap: 30px;
+
+        @media (max-width: 1024px) {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    .contract-content {
+        flex-grow: 1;
+        background: white;
+        padding: 24px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .loading-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+
+    .ck-content {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+
+    .ck-content p {
+        margin-bottom: 1rem;
+    }
+
+    .ck-content strong {
+        font-weight: bold;
+    }
+
+    .ck-content img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px 0;
+    }
+
+    .ck-content ul,
+    .ck-content ol {
+        padding-left: 20px;
+    }
+
+    .ck-content blockquote {
+        border-left: 4px solid #ddd;
+        padding-left: 10px;
+        color: #555;
+        font-style: italic;
+    }
+}
+
+.whatsapp-button {
+    background-color: #25d366;
+    color: #22456f;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+        background-color: #1ebe57;
+    }
+
+    .whatsapp-icon {
+        font-size: 18px;
+    }
+}
+
+.agreement-page {
+    p,
+    li {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+}
+.modal-agreement {
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+    overflow: hidden;
+
+    .content {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+
+      /* ARADA gelen w-full wrapper’ı da flex item yap, scroll’u ona ver */
+      .w-full {
+        flex: 1 1 auto;
+        overflow-y: auto;
+      }
+    }
+
+    /* footer (buton) sabit kalsın */
+    button {
+      flex: 0 0 auto;
+    }
+  }
+}
+
+
+
+
+

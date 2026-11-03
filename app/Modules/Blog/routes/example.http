@@ -1,0 +1,30 @@
+### POST request to Blog API
+POST http://localhost:8000/api/Blog
+Content-Type: application/json
+
+{
+    "name": "John Doe"
+}
+
+###
+
+GET http://localhost:8000/api/blog
+
+###
+
+GET http://localhost:8000/api/blog/1
+
+###
+
+PUT http://localhost:8000/api/blog/1
+Content-Type: application/json
+
+{
+    "name": "Updated John Doe"
+}
+
+###
+
+DELETE http://localhost:8000/api/blog/1
+
+###

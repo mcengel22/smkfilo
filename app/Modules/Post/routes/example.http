@@ -1,0 +1,30 @@
+### POST request to Post API
+POST http://localhost:8000/api/Post
+Content-Type: application/json
+
+{
+    "name": "John Doe"
+}
+
+###
+
+GET http://localhost:8000/api/post
+
+###
+
+GET http://localhost:8000/api/post/1
+
+###
+
+PUT http://localhost:8000/api/post/1
+Content-Type: application/json
+
+{
+    "name": "Updated John Doe"
+}
+
+###
+
+DELETE http://localhost:8000/api/post/1
+
+###

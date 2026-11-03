@@ -1,0 +1,169 @@
+@use "../variable" as *;
+.date-picker-v2 {
+    position: relative;
+    width: 100%;
+    background: #f6f6f9;
+    border-radius: 10px;
+    border: none;
+
+    .date-header {
+        padding: 0.375rem 0.75rem;
+        cursor: pointer;
+        // border: 1px solid #e5e7eb;
+        color: #22456f;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+
+        &:hover {
+            border-color: #3b82f6;
+        }
+
+        .date-info {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+
+            .date-section {
+                flex: 1;
+
+                label {
+                    display: block;
+                    font-size: 0.875rem;
+                    color: #6b7280;
+                    margin-bottom: 0.25rem;
+                }
+
+                .selected-date {
+                    font-size: 1rem;
+                    color: #22456f;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    .calendar-wrapper {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        left: 0;
+        right: 0;
+        z-index: 50;
+
+        .bottom-availability-calendar {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            background: #fff;
+            padding: 1rem;
+
+            // Takvim container'ını tek sütuna çevir
+            .calendar-container {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            // İkinci ayı gizle
+            .calendar-month:nth-child(2) {
+                display: none;
+            }
+
+            .calendar-content {
+                .calendar-month {
+                    width: 100%;
+                }
+            }
+
+            // BottomDatePicker'ın header'ını gizle
+            .date-header {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .date-picker-v2 {
+        .date-header {
+            padding: 0.75rem;
+
+            .date-info {
+                .date-section {
+                    .selected-date {
+                        font-size: 0.875rem;
+                    }
+                }
+            }
+        }
+
+        .calendar-wrapper {
+            .bottom-availability-calendar {
+                padding: 0.75rem;
+            }
+        }
+    }
+}
+
+/* Rezervasyon oluştur */
+.reservation-calendar {
+    .select-reservation {
+        text-align: center;
+        display: none;
+        position: fixed;
+        top: 40%;
+        left: 40%;
+        z-index: 999999999999;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        padding: 2rem;
+        .btn-secondary {
+            background-color: $tertiary;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            color: $white;
+        }
+    }
+}
+.offCanvas {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 1rem;
+    height: 100%;
+    width: 500px;
+    max-height: 600px;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: $white;
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    z-index: 999;
+    box-sizing: border-box;
+}
+
+.canvas-modal {
+    height: 100%;
+    position: fixed;
+    // right: 50%;
+    // top: 1rem;
+    width: 500px;
+    max-height: 600px;
+    height: auto;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: $white;
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    z-index: 999;
+    box-sizing: border-box;
+}
+
+.fc-daygrid-day-events {
+    min-height: 80px !important;
+    margin-bottom: 0 !important;
+    .fc-daygrid-event-harness {
+        height: 100% !important;
+        .fc-event {
+            height: 100% !important;
+        }
+    }
+}

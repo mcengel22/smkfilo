@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montez&display=swap");
+
+$white: #fff;
+$black: #000;
+
+$orange: #312b27;
+$blue: #22456f;
+
+$text-color: #0f131a;
+
+$primary: #0081c9;
+$secondary: #347928;
+$tertiary: #0081c9;
+$quaternary: #86e5ff;
+$fifth: #443733;
+
+:root {
+  --color: #ef7c22;
+  --color2: #22456f;
+  --color2-dark: #0f131a;
+}
+
+// Breakpoint
+$breakpoint: 1201px;

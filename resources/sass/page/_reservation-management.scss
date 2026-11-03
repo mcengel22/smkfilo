@@ -1,0 +1,226 @@
+@use "../variable" as *;
+.reservation-management {
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  .sub-title {
+    font-size: 1rem;
+    display: block;
+    line-height: 1.3rem;
+  }
+  .content {
+    .card {
+      background-color: $white;
+      border: none;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      margin-bottom: 2rem;
+      input {
+        padding: 0.75rem 1rem;
+        border: 1px solid #22456f33;
+        border-radius: 6px;
+        width: 100%;
+        @media (max-width: 992px) {
+          margin-bottom: 1rem;
+        }
+      }
+      .info {
+        p {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+  .preview {
+        border-radius: 50px;
+        background: 1px #f7f6f6;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 1.7rem;
+        margin-bottom: 1.9rem;
+    .title {
+      h2 {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+      span {
+        font-weight: 500;
+      }
+    }
+    .info.card {
+      .head {
+        margin-left: 0.7rem;
+        padding: 0.8rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        color: $primary;
+        border-radius: 100px;
+        background: 1px #f7f6f6;
+        padding-left: 1rem;
+        width: 25%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.2s ease;
+        &:hover{
+            background: 1px #e4e2e2;
+        }
+        .number {
+          font-weight: 600;
+          color: $text-color;
+        }
+      }
+      .user-info {
+        padding: 0.7rem;
+        margin-left: 0.5rem;
+        border-radius: 100px;
+        background: 1px #f7f6f6;
+        padding-left: 1rem;
+        width: 58%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom:2rem;
+        &:hover{
+            background: 1px #e4e2e2;
+        }
+      }
+      .ilan-info{
+        padding: 1.2rem;
+        margin-left: 0.3rem;
+        border-radius: 50px;
+        background: 1px #f7f6f6;
+        width: 48%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom:2rem;
+            &:hover{
+                background: 1px #e4e2e2;
+            }
+        img {
+            border-radius: 8px;
+            margin-right: 1rem;
+          }
+            ul {
+                li {
+                font-weight: 600;
+                color: $primary;
+                font-size: 0.95rem;
+                margin-bottom: 0.1rem;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                span {
+                    font-weight: 500;
+                    color: $text-color;
+                }
+                }
+            }
+      }
+      .date-info{
+        padding: 1.2rem;
+        margin-left: 0.3rem;
+        border-radius: 50px;
+        background: 1px #f7f6f6;
+        width: 48%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom:2rem;
+        .txs{
+            font-size: 500;
+        }
+        .icerik{
+            margin-right: 10%;
+        }
+            ul {
+                li {
+                font-weight: 600;
+                color: $primary;
+                font-size: 1rem;
+                margin-bottom: 0.1rem;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                span {
+                    font-weight: 500;
+                    color: $text-color;
+                }
+                }
+            }
+      }
+      .user-info {
+        img {
+          border-radius: 8px;
+          margin-right: 10rem;
+          margin-left: 1rem;
+        }
+        .info {
+          ul {
+            li {
+              font-weight: 600;
+              color: $primary;
+              font-size: 1rem;
+              margin-bottom: 0.1rem;
+              &:last-child {
+                margin-bottom: 0;
+              }
+              span {
+                font-weight: 500;
+                color: $text-color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.referans-kodu-card {
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+  margin-left: auto;
+  margin-bottom: 15px;
+  .referans-kodu-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 0;
+  }
+
+  .referans-label {
+    font-weight: bold;
+    font-size: 15px;
+    color: #333;
+  }
+  .referans-input-container {
+    display: flex;
+    align-items: center;
+    background: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .referans-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+    color: #ff8c00;
+  }
+  .copy-btn {
+    background: rgb(0, 104, 224);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 8px;
+    margin-left: 8px;
+  }
+  .copy-btn:hover {
+    background: rgb(0, 104, 224);
+  }
+}

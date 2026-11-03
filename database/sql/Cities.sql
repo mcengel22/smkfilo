@@ -1,0 +1,90 @@
+-- iller tablosunu oluştur
+CREATE TABLE IF NOT EXISTS cities (
+                                      id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,  -- UNSIGNED ile kullanıyoruz
+                                      name VARCHAR(50) NOT NULL
+);
+
+-- ----------------------------
+-- Records of cities
+-- ----------------------------
+INSERT INTO cities VALUES ('1', 'Adana');
+INSERT INTO cities VALUES ('2', 'Adiyaman');
+INSERT INTO cities VALUES ('3', 'Afyonkarahisar');
+INSERT INTO cities VALUES ('4', 'Agri');
+INSERT INTO cities VALUES ('5', 'Amasya');
+INSERT INTO cities VALUES ('6', 'Ankara');
+INSERT INTO cities VALUES ('7', 'Antalya');
+INSERT INTO cities VALUES ('8', 'Artvin');
+INSERT INTO cities VALUES ('9', 'Aydin');
+INSERT INTO cities VALUES ('10', 'Balikesir');
+INSERT INTO cities VALUES ('11', 'Bilecik');
+INSERT INTO cities VALUES ('12', 'Bingol');
+INSERT INTO cities VALUES ('13', 'Bitlis');
+INSERT INTO cities VALUES ('14', 'Bolu');
+INSERT INTO cities VALUES ('15', 'Burdur');
+INSERT INTO cities VALUES ('16', 'Bursa');
+INSERT INTO cities VALUES ('17', 'Canakkale');
+INSERT INTO cities VALUES ('18', 'Cankiri');
+INSERT INTO cities VALUES ('19', 'Corum');
+INSERT INTO cities VALUES ('20', 'Denizli');
+INSERT INTO cities VALUES ('21', 'Diyarbakir');
+INSERT INTO cities VALUES ('22', 'Edirne');
+INSERT INTO cities VALUES ('23', 'Elazig');
+INSERT INTO cities VALUES ('24', 'Erzincan');
+INSERT INTO cities VALUES ('25', 'Erzurum');
+INSERT INTO cities VALUES ('26', 'Eskisehir');
+INSERT INTO cities VALUES ('27', 'Gaziantep');
+INSERT INTO cities VALUES ('28', 'Giresun');
+INSERT INTO cities VALUES ('29', 'Gumushane');
+INSERT INTO cities VALUES ('30', 'Hakkari');
+INSERT INTO cities VALUES ('31', 'Hatay');
+INSERT INTO cities VALUES ('32', 'Isparta');
+INSERT INTO cities VALUES ('33', 'Mersin');
+INSERT INTO cities VALUES ('34', 'Istanbul');
+INSERT INTO cities VALUES ('35', 'Izmir');
+INSERT INTO cities VALUES ('36', 'Kars');
+INSERT INTO cities VALUES ('37', 'Kastamonu');
+INSERT INTO cities VALUES ('38', 'Kayseri');
+INSERT INTO cities VALUES ('39', 'Kirklareli');
+INSERT INTO cities VALUES ('40', 'Kirsehir');
+INSERT INTO cities VALUES ('41', 'Kocaeli');
+INSERT INTO cities VALUES ('42', 'Konya');
+INSERT INTO cities VALUES ('43', 'Kutahya');
+INSERT INTO cities VALUES ('44', 'Malatya');
+INSERT INTO cities VALUES ('45', 'Manisa');
+INSERT INTO cities VALUES ('46', 'Kahramanmaras');
+INSERT INTO cities VALUES ('47', 'Mardin');
+INSERT INTO cities VALUES ('48', 'Mugla');
+INSERT INTO cities VALUES ('49', 'Mus');
+INSERT INTO cities VALUES ('50', 'Nevsehir');
+INSERT INTO cities VALUES ('51', 'Nigde');
+INSERT INTO cities VALUES ('52', 'Ordu');
+INSERT INTO cities VALUES ('53', 'Rize');
+INSERT INTO cities VALUES ('54', 'Sakarya');
+INSERT INTO cities VALUES ('55', 'Samsun');
+INSERT INTO cities VALUES ('56', 'Siirt');
+INSERT INTO cities VALUES ('57', 'Sinop');
+INSERT INTO cities VALUES ('58', 'Sivas');
+INSERT INTO cities VALUES ('59', 'Tekirdag');
+INSERT INTO cities VALUES ('60', 'Tokat');
+INSERT INTO cities VALUES ('61', 'Trabzon');
+INSERT INTO cities VALUES ('62', 'Tunceli');
+INSERT INTO cities VALUES ('63', 'Sanliurfa');
+INSERT INTO cities VALUES ('64', 'Usak');
+INSERT INTO cities VALUES ('65', 'Van');
+INSERT INTO cities VALUES ('66', 'Yozgat');
+INSERT INTO cities VALUES ('67', 'Zonguldak');
+INSERT INTO cities VALUES ('68', 'Aksaray');
+INSERT INTO cities VALUES ('69', 'Bayburt');
+INSERT INTO cities VALUES ('70', 'Karaman');
+INSERT INTO cities VALUES ('71', 'Kirikkale');
+INSERT INTO cities VALUES ('72', 'Batman');
+INSERT INTO cities VALUES ('73', 'Sirnak');
+INSERT INTO cities VALUES ('74', 'Bartin');
+INSERT INTO cities VALUES ('75', 'Ardahan');
+INSERT INTO cities VALUES ('76', 'Igdir');
+INSERT INTO cities VALUES ('77', 'Yalova');
+INSERT INTO cities VALUES ('78', 'Karabuk');
+INSERT INTO cities VALUES ('79', 'Kilis');
+INSERT INTO cities VALUES ('80', 'Osmaniye');
+INSERT INTO cities VALUES ('81', 'Duzce');

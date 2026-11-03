@@ -1,0 +1,528 @@
+@use "../variable" as *;
+.reservation-page {
+    background-color: #f9fafb;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 80px; // Alt bar için boşluk
+    .container {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 24px 16px;
+
+        @media (min-width: 640px) {
+            padding: 32px 24px;
+        }
+    }
+    // Sol Kolon Stilleri
+    .card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+    .villa-preview {
+        .villa-image {
+            position: relative;
+            height: 240px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+
+            img {
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+        }
+
+        .villa-info {
+            h2 {
+                font-size: 20px;
+                font-weight: 600;
+                color: #1f2937;
+                margin-bottom: 8px;
+            }
+
+            p {
+                color: #6b7280;
+            }
+
+            .check-times {
+                display: flex;
+                justify-content: space-between;
+                padding-top: 16px;
+                margin-top: 16px;
+                border-top: 1px solid #e5e7eb;
+
+                .time-block {
+                    text-align: center;
+
+                    span {
+                        &:first-child {
+                            display: block;
+                            font-size: 14px;
+                            color: #6b7280;
+                            margin-bottom: 4px;
+                        }
+
+                        &.time {
+                            font-weight: 500;
+                            color: #1f2937;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Rezervasyon Detayları
+    .reservation-details {
+        .info-box {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+
+            .flex {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+    }
+
+    // Fiyat Özeti
+    .price-summary {
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+
+            span {
+                &:first-child {
+                    color: #6b7280;
+                }
+            }
+
+            &.highlight {
+                color: #f97316;
+                font-weight: 500;
+            }
+
+            &.total {
+                padding-top: 16px;
+                margin-top: 8px;
+                border-top: 1px solid #e5e7eb;
+                font-weight: 600;
+                color: #1f2937;
+            }
+        }
+    }
+
+    // Ödeme Seçenekleri
+    .payment-options {
+        .grid {
+            display: grid;
+            gap: 16px;
+
+            @media (min-width: 768px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .payment-option {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+                border-color: #f97316;
+                background-color: #fff7ed;
+            }
+
+            &.selected {
+                border-color: #f97316;
+                background-color: #fff7ed;
+            }
+
+            .radio-circle {
+                width: 20px;
+                height: 20px;
+                border: 2px solid #e5e7eb;
+                border-radius: 50%;
+                position: relative;
+
+                &.selected {
+                    border-color: #f97316;
+                    background: #f97316;
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        width: 8px;
+                        height: 8px;
+                        background: white;
+                        border-radius: 50%;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+        }
+    }
+
+    // Ödeme Yöntemleri
+    .payment-methods {
+        .grid {
+            display: grid;
+            gap: 16px;
+
+            @media (min-width: 768px) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .payment-method {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+                border-color: #f97316;
+                background-color: #fff7ed;
+            }
+
+            &.selected {
+                border-color: #f97316;
+                background-color: #fff7ed;
+            }
+        }
+    }
+
+    // Sabit Alt Bar
+    .fixed-bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        border-top: 1px solid #e5e7eb;
+        box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+        z-index: 50;
+        width: 100%;
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .price-info {
+                span {
+                    &:first-child {
+                        display: block;
+                        font-size: 14px;
+                        color: #6b7280;
+                    }
+
+                    &:last-child {
+                        font-size: 20px;
+                        font-weight: 600;
+                        color: #1f2937;
+                    }
+                }
+            }
+
+            .payment-button {
+                background: #f97316;
+                color: #ffffff;
+                padding: 12px 32px;
+                border-radius: 8px;
+                font-weight: 500;
+                transition: background-color 0.2s;
+
+                &:hover {
+                    background: #ea580c;
+                }
+            }
+        }
+    }
+}
+
+.reservation {
+    .card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+    .contact-form {
+        background: #ffffff;
+        border-radius: 0.75rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+        .form-group {
+            position: relative;
+
+            label {
+                display: flex;
+                align-items: center;
+                gap: 0.25rem;
+                color: #374151;
+                margin-bottom: 0.5rem;
+
+                .required {
+                    color: #f97316;
+                }
+            }
+
+            .input-with-icon {
+                position: relative;
+
+                i {
+                    position: absolute;
+                    left: 1rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: #9ca3af;
+                    pointer-events: none;
+                    z-index: 1;
+                }
+
+                textarea ~ i {
+                    top: 1.25rem;
+                    transform: none;
+                }
+            }
+
+            .form-input {
+                width: 100%;
+                padding: 0.75rem 1rem 0.75rem 2.75rem;
+                background-color: #f9fafb;
+                border: 1px solid #e5e7eb;
+                border-radius: 0.5rem;
+                font-size: 0.875rem;
+                color: #1f2937;
+                transition: all 0.2s ease;
+                &.error {
+                    border-color: red;
+                }
+
+                &:hover {
+                    border-color: #d1d5db;
+                }
+
+                &:focus {
+                    background-color: #ffffff;
+                    border-color: #f97316;
+                    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+                    outline: none;
+                }
+
+                &::placeholder {
+                    color: #9ca3af;
+                }
+
+                &:disabled {
+                    background-color: #f3f4f6;
+                    cursor: not-allowed;
+                }
+            }
+
+            textarea.form-input {
+                min-height: 100px;
+                resize: vertical;
+                padding-top: 0.75rem;
+            }
+
+            .helper-text {
+                margin-top: 0.5rem;
+                font-size: 0.875rem;
+                color: #6b7280;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+
+                i {
+                    color: #9ca3af;
+                }
+            }
+        }
+
+        .info-box {
+            background-color: #eff6ff;
+            border: 1px solid #dbeafe;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1.5rem;
+
+            i {
+                color: #3b82f6;
+            }
+
+            p {
+                color: #1e40af;
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+            }
+        }
+
+        // Adım göstergesi
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            .step-number {
+                width: 2rem;
+                height: 2rem;
+                background-color: #f97316;
+                color: #ffffff;
+                border-radius: 9999px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 500;
+                font-size: 0.875rem;
+            }
+
+            .step-total {
+                color: #6b7280;
+                font-weight: 500;
+                font-size: 0.875rem;
+            }
+        }
+    }
+
+    .important-notes {
+        .note-item {
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+
+            &:hover {
+                .note-header {
+                    background-color: #f8fafc;
+                }
+            }
+
+            .note-header {
+                transition: background-color 0.2s ease;
+
+                .icon-wrapper {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &.deposit {
+                        background-color: #fff7ed;
+                        color: #f97316;
+                    }
+
+                    &.included {
+                        background-color: #eff6ff;
+                        color: #3b82f6;
+                    }
+
+                    &.times {
+                        background-color: #f0fdf4;
+                        color: #22c55e;
+                    }
+
+                    &.terms {
+                        background-color: #f5f3ff;
+                        color: #8b5cf6;
+                    }
+                }
+            }
+
+            .note-content {
+                animation: slideDown 0.2s ease-out;
+
+                .time-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 16px;
+
+                    .time-box {
+                        background-color: #f8fafc;
+                        padding: 12px;
+                        border-radius: 8px;
+                        text-align: center;
+
+                        .label {
+                            font-size: 14px;
+                            color: #6b7280;
+                            margin-bottom: 4px;
+                        }
+
+                        .value {
+                            font-weight: 500;
+                            color: #1f2937;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+// Responsive Düzen
+@media (min-width: 768px) {
+    .reservation-page {
+        .flex-row {
+            display: flex;
+            gap: 24px;
+
+            .left-column {
+                width: 33.333333%;
+            }
+
+            .right-column {
+                width: 66.666667%;
+            }
+        }
+    }
+}
+
+// Mobil Düzenlemeler
+@media (max-width: 767px) {
+    .reservation-page {
+        .container {
+            padding: 16px;
+        }
+
+        .fixed-bottom-bar {
+            .container {
+                padding: 12px 16px;
+
+                .payment-button {
+                    padding: 10px 24px;
+                }
+            }
+        }
+    }
+}

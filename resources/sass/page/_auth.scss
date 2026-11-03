@@ -1,0 +1,299 @@
+@use "../variable" as *;
+.auth {
+    background: url(/img/auth-bg.JPG);
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    .card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 1rem;
+    }
+    .card-container {
+        width: 100%;
+        max-width: 500px;
+        background-color: $white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba($black, 0.1);
+        padding: 2rem;
+        border: 1px solid rgba($blue, 0.1);
+        .header {
+            text-align: center;
+            margin-bottom: 1rem;
+
+            h1 {
+                color: $blue;
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 0rem;
+            }
+            p {
+                color: $blue;
+                font-weight: 500;
+                font-size: 0.8rem;
+            }
+        }
+
+        .login-header {
+            text-align: center;
+
+            h1 {
+                color: $blue;
+                font-size: 1.75rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
+
+            p {
+                color: $secondary;
+                font-size: 0.875rem;
+            }
+        }
+        .login-form {
+            .form-group {
+                margin-bottom: 0.5rem;
+
+                label {
+                    display: block;
+                    color: $blue;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    margin-bottom: 0.5rem;
+                }
+
+                input {
+                    width: 100%;
+                    padding: 0.75rem 1rem;
+                    border: 1px solid rgba($blue, 0.2);
+                    border-radius: 6px;
+                    font-size: 0.9rem;
+                    color: $blue;
+                    transition: all 0.2s ease;
+
+                    &:focus {
+                        outline: none;
+                        border-color: $orange;
+                        box-shadow: 0 0 0 3px rgba($orange, 0.1);
+                    }
+
+                    &::placeholder {
+                        color: rgba($blue, 0.4);
+                    }
+                }
+                a {
+                    color: $orange;
+                    text-decoration: none;
+                    font-weight: 500;
+                    transition: color 0.2s ease;
+                    font-size: 0.9rem;
+                    text-align: right;
+                    display: block;
+
+                    &:hover {
+                        color: $orange;
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .error-message {
+                background-color: rgba($fifth, 0.1);
+                color: $fifth;
+                padding: 0.75rem;
+                border-radius: 6px;
+                font-size: 0.875rem;
+                margin-bottom: 1rem;
+            }
+
+            .submit-button {
+                width: 100%;
+                padding: 0.75rem;
+                background-color: $orange;
+                color: $white;
+                border: none;
+                border-radius: 6px;
+                font-size: 1rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background-color: $orange;
+                }
+
+                &:disabled {
+                    opacity: 0.7;
+                    cursor: not-allowed;
+                }
+            }
+
+            .auth-links {
+                margin-top: 1.5rem;
+                text-align: center;
+                font-size: 0.9rem;
+                color: $secondary;
+
+                a {
+                    color: $orange;
+                    text-decoration: none;
+                    font-weight: 500;
+                    transition: color 0.2s ease;
+
+                    &:hover {
+                        color: $orange;
+                        text-decoration: underline;
+                    }
+                }
+
+                .separator {
+                    margin: 0 0.5rem;
+                    color: rgba($blue, 0.7);
+                }
+            }
+        }
+
+        .register-header {
+            text-align: center;
+
+            h1 {
+                color: $blue;
+                font-size: 1.75rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
+
+            p {
+                color: $secondary;
+                font-size: 0.875rem;
+            }
+        }
+
+        .register-form {
+            .form-group {
+                margin-bottom: 0.5rem;
+
+                label {
+                    display: block;
+                    color: $blue;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    // margin-bottom: 0.5rem;
+                }
+
+                input,
+                select {
+                    width: 100%;
+                    padding: 0.75rem 1rem;
+                    border: 1px solid rgba($blue, 0.2);
+                    border-radius: 6px;
+                    font-size: 0.9rem;
+                    color: $blue;
+                    transition: all 0.2s ease;
+
+                    &:focus {
+                        outline: none;
+                        border-color: $orange;
+                        box-shadow: 0 0 0 3px rgba($orange, 0.1);
+                    }
+
+                    &::placeholder {
+                        color: rgba($blue, 0.4);
+                    }
+                }
+            }
+
+            .error-message {
+                background-color: rgba($fifth, 0.1);
+                color: $fifth;
+                padding: 0.75rem;
+                border-radius: 6px;
+                font-size: 0.875rem;
+                margin-bottom: 1rem;
+            }
+
+            .submit-button {
+                width: 100%;
+                padding: 0.75rem;
+                background-color: $orange;
+                color: $white;
+                border: none;
+                border-radius: 6px;
+                font-size: 1rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background-color: $orange;
+                }
+
+                &:disabled {
+                    opacity: 0.7;
+                    cursor: not-allowed;
+                }
+            }
+
+            .auth-links {
+                margin-top: 1.5rem;
+                text-align: center;
+                font-size: 0.875rem;
+                color: $secondary;
+
+                a {
+                    color: $orange;
+                    text-decoration: none;
+                    font-weight: 500;
+                    transition: color 0.2s ease;
+
+                    &:hover {
+                        color: $orange;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+    .home-links {
+        text-align: center;
+        margin-top: 0.5rem;
+        a {
+            color: $orange;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+    }
+
+    .pass-input {
+        position: relative;
+        span {
+            position: absolute;
+            cursor: pointer;
+            right: 2rem;
+            top: 35%;
+        }
+    }
+    .pass-strength {
+        p {
+            display: none;
+        }
+        div {
+            height: 4px !important;
+            border-radius: 8px;
+        }
+    }
+    .pass-info {
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: grey;
+    }
+}
+
+.error-input {
+    font-size: 0.8rem;
+    color: #ef4444;
+    font-weight: 500;
+}

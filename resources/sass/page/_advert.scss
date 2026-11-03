@@ -1,0 +1,274 @@
+@use "../variable" as *;
+.create-reservation,
+.create-adverts {
+    .card {
+        background-color: $white;
+        margin: 1rem 0;
+        border-radius: 12px;
+        padding: 1rem;
+        label {
+            font-weight: 600;
+            color: $blue;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        .form-control {
+            border: 1px solid #ccc;
+            width: 100%;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: $text-color;
+        }
+        textarea {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            width: 100%;
+            color: $text-color;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+    }
+    .btn {
+        box-shadow: none;
+        padding: 0.8rem 1.5rem;
+        display: flex;
+        align-items: center;
+        width: 100px;
+        justify-content: center;
+        transition: 0.3s all ease-in-out;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        &.delete-btn {
+            color: #f8285a;
+            background-color: #ffeef3;
+            .icon {
+                margin-right: 0.2rem;
+                &:before {
+                    background-color: #f8285a;
+                }
+            }
+            &:hover {
+                background-color: #f8285a;
+                color: $white;
+                .icon {
+                    &:before {
+                        background-color: $white;
+                    }
+                }
+            }
+        }
+        &.add-btn {
+            color: #1b84ff;
+            background-color: #e9f3ff;
+            .icon {
+                margin-right: 0.2rem;
+                &:before {
+                    background-color: #1b84ff;
+                }
+            }
+            &:hover {
+                color: $white;
+                background-color: #1b84ff;
+                .icon {
+                    &:before {
+                        background-color: $white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.create-adverts {
+    .search-datepicker {
+        max-width: none !important;
+        z-index: 0;
+        .search-datepicker-header {
+            padding: 0.2rem 0.5rem;
+            background-color: transparent;
+            border-radius: 0.25rem;
+        }
+        .search-date-label {
+            font-size: 0.9rem !important;
+            color: inherit !important;
+        }
+    }
+    .react-dropdown-select {
+        padding: 0.5rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    input,
+    select {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    .btn {
+        box-shadow: none;
+        padding: 0.8rem 1.5rem;
+        display: flex;
+        align-items: center;
+        width: 100px;
+        justify-content: center;
+        transition: 0.3s all ease-in-out;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        &.delete-btn {
+            color: #f8285a;
+            background-color: #ffeef3;
+            .icon {
+                margin-right: 0.2rem;
+                &:before {
+                    background-color: #f8285a;
+                }
+            }
+            &:hover {
+                background-color: #f8285a;
+                color: $white;
+                .icon {
+                    &:before {
+                        background-color: $white;
+                    }
+                }
+            }
+        }
+        &.add-btn {
+            color: #1b84ff;
+            background-color: #e9f3ff;
+            .icon {
+                margin-right: 0.2rem;
+                &:before {
+                    background-color: #1b84ff;
+                }
+            }
+            &:hover {
+                color: $white;
+                background-color: #1b84ff;
+                .icon {
+                    &:before {
+                        background-color: $white;
+                    }
+                }
+            }
+        }
+    }
+    .datepicker-overlay {
+        display: none;
+    }
+}
+
+.upload-gallery {
+    // .category-area {
+    //   border-radius: 12px;
+    //   border: 1px solid rgba(34, 69, 111, 0.1);
+    //   padding: 1rem;
+    //   margin-bottom: 0.5rem;
+    //   span {
+    //     font-size: 0.9rem;
+    //     font-weight: 500;
+    //   }
+    //   .btn {
+    //     width: 2rem;
+    //     height: 2rem;
+    //     margin-left: 0.5rem;
+    //     .icon {
+    //       &:before {
+    //         background-color: $white;
+    //       }
+    //     }
+    //   }
+    //   .uploaded-photo {
+    //     img {
+    //       object-fit: contain;
+    //       border: 1px solid #6990f2;
+    //       padding: 0.5rem;
+    //       border-radius: 8px;
+    //       width: 4rem;
+    //       height: 4rem;
+    //     }
+    //     .icon {
+    //       &:before {
+    //         background-color: $white;
+    //         width: 0.8rem;
+    //         height: 0.8rem;
+    //       }
+    //     }
+    //   }
+    // }
+    // .upload-modal {
+    //   z-index: 999;
+    //   .modal-body {
+    //     padding: 2rem;
+    //     border-radius: 18px;
+    //     min-width: 42rem;
+    //     h3 {
+    //       font-size: 1rem;
+    //       font-weight: 500;
+    //     }
+    //     .btn {
+    //       padding: 0.5rem;
+    //       color: $white;
+    //       border-radius: 0.5rem;
+    //     }
+    //     input {
+    //       width: 100%;
+    //     }
+    //     .upload-input {
+    //       display: flex;
+    //       cursor: pointer;
+    //       margin-bottom: 0.5rem;
+    //       align-items: center;
+    //       justify-content: center;
+    //       flex-direction: column;
+    //       border-radius: 5px;
+    //       padding: 1rem;
+    //       border: 2px dashed #6990f2;
+    //       span {
+    //         font-weight: 500;
+    //       }
+    //       .icon {
+    //         &:before {
+    //           width: 2rem;
+    //           height: 2rem;
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    .preview-img {
+        img {
+            object-fit: contain;
+            border: 1px solid #6990f2;
+            padding: 0.5rem;
+            border-radius: 8px;
+            width: 4rem;
+            height: 4rem;
+        }
+        button {
+            background-color: red;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0.2rem;
+            .icon {
+                &:before {
+                    background-color: #fff;
+                    width: 0.8rem;
+                    height: 0.8rem;
+                }
+            }
+        }
+    }
+}

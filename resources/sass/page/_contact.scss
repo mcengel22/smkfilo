@@ -1,0 +1,30 @@
+@use "../variable" as *;
+.contact {
+  .info-title {
+    background-color: $tertiary;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: $white;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    .icon {
+      margin-right: 0.5rem;
+      &:before {
+        background-color: $white;
+        width: 1.1rem;
+        height: 1.1rem;
+      }
+    }
+  }
+  a,
+  p {
+    font-weight: 700;
+    text-align: right;
+  }
+  a {
+    &:hover {
+      color: $secondary;
+    }
+  }
+}

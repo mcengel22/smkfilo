@@ -1,0 +1,15 @@
+@import "./sass/app.module.scss";
+
+@import "./sass/framework";
+@import "./sass/variable";
+@import "./sass/mixing";
+@import "./sass/component";
+@import "./sass/layout";
+@import "./sass/page";
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+

@@ -1,0 +1,69 @@
+@use "../variable" as *;
+.about-page {
+  h2 {
+    color: #0081c9;
+  }
+  p {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .right-info {
+    p.card-info {
+      font-size: 1.1rem;
+      font-weight: 600;
+      span {
+        color: $orange;
+        display: inline-block;
+      }
+    }
+    img {
+      height: 250px;
+      margin-top: 1rem;
+    }
+  }
+  .other-info {
+    h4 {
+      color: #0081c9;
+      font-size: 1.2rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+.institutional-page {
+  .card {
+    border-radius: 16px;
+    img {
+      border-radius: 16px;
+      object-fit: cover;
+      overflow: hidden;
+      padding-bottom: 1rem;
+    }
+  }
+  .step-card {
+    .icon {
+      &:before {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+  }
+  @media (max-width: 992px) {
+    img {
+      width: 100%;
+      &.stars-img {
+        width: auto;
+      }
+    }
+  }
+}
