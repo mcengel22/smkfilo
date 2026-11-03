@@ -109,8 +109,12 @@ const Listing = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         getPosts();
-        getSeoData();
     }, [filters?.pagination, filters?.sort, filters?.type]);
+
+    // SEO sadece ilan tipi değişince değişir; sayfa/sıralama değişiminde tekrar çekme
+    useEffect(() => {
+        getSeoData();
+    }, [filters?.type]);
 
     // 🔁 SEO datası değişince meta fallback
     useEffect(() => {

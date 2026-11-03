@@ -37,7 +37,7 @@ class PostDetailResource extends JsonResource
                 'key' => $key,
                 'title' => $meta['title'],
                 'icon' => $meta['icon'],
-                'value' => optional($this->details()->firstWhere('key', $key))->value
+                'value' => optional($this->details->firstWhere('key', $key))->value
             ];
         })->values();
 
@@ -50,7 +50,7 @@ class PostDetailResource extends JsonResource
                 'key' => $key,
                 'title' => $meta['title'],
                 'icon' => $meta['icon'],
-                'value' => optional($this->details()->firstWhere('key', $key))->value
+                'value' => optional($this->details->firstWhere('key', $key))->value
             ];
         })->values();
 

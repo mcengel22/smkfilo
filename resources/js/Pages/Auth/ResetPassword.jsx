@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
-import PasswordStrengthBar from 'react-password-strength-bar';
+import PasswordStrengthBar from "@/Components/UI/Misc/PasswordStrength.jsx";
 
 const ResetPassword = () => {
     const { t } = useTranslation();

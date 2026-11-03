@@ -20,6 +20,9 @@ const Footer = () => {
     const { getPolicies } = usePolicies();
     const [policies, setPolicies] = useState([]);
     useEffect(() => {
+        // Sayfa/layout değişiminde tekrar çekme
+        if (regions?.length) return;
+
         const setPopulerRegion = async () => {
             try {
                 const data = await setPopulerregions(); // burada da useUser içinden gelen fonksiyonu çağırıyoruz
@@ -52,6 +55,8 @@ const Footer = () => {
 
 
     useEffect(() => {
+        if (categories?.length) return;
+
         const setCategorie = async () => {
             try {
                 const data = await setCategories(); // burada da useUser içinden gelen fonksiyonu çağırıyoruz
@@ -153,20 +158,20 @@ const Footer = () => {
                                 </div>
 
                                 <div className="flex flex-col sm:flex-row gap-4">
-                                    <Link href="tel:+0"
+                                    <a href="tel:+905305421233"
                                           className="flex items-center gap-3 px-6 py-3 bg-white shadow-md rounded-lg hover:bg-gray-100 transition">
                                         <i className="icon support text-lg"></i>
                                         <span className="font-semibold text-lg">
-                                                +90 555 555 55 55
+                                                +90 530 542 12 33
                                             </span>
-                                    </Link>
-                                    <Link href="mailto:info@rentacar.com"
+                                    </a>
+                                    <a href="mailto:info@rentacar.com"
                                           className="flex items-center gap-3 px-6 py-3 bg-white shadow-md rounded-lg hover:bg-gray-100 transition">
                                         <i className="icon envelope-text text-lg"></i>
                                         <span className="font-semibold text-lg">
                                                 info@rentacar.com
                                             </span>
-                                    </Link>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +183,7 @@ const Footer = () => {
                     <div className="flex flex-wrap mb-5">
                         <div className="w-full sm:w-1/2 lg:w-1/4 p-4">
                             <div className="logo mb-3">
-                                <Link href="/">
+                                <Link to="/">
                                     <img
                                         src="/img/logo/filologo.webp"
                                         alt=""
@@ -308,7 +313,7 @@ const Footer = () => {
                 <div className="text">
                     <p>
                         {t("Tüm Telif Hakları Saklıdır")} © 2026 &nbsp;
-                        <Link href="https://www.msyyazilim.com">MSY YAZILIM</Link>
+                        <a href="https://www.msyyazilim.com" target="_blank" rel="noopener noreferrer">MSY YAZILIM</a>
                     </p>
                 </div>
             </div>

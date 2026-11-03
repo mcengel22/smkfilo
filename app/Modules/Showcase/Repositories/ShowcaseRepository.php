@@ -11,7 +11,8 @@ class ShowcaseRepository
         // showcaseHasPosts ilişkisi ile birlikte, 'sort_order' alanına göre artan sıralama
         return Showcase::with([
             'showcaseHasPosts.post' => function ($query) {
-                $query->where('status', 1); // 👈 Sadece aktif post'lar
+                $query->where('status', 1) // 👈 Sadece aktif post'lar
+                    ->withCardRelations();
             }
         ])
             ->orderBy('sort_order', 'asc')

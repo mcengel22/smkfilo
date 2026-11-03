@@ -148,6 +148,12 @@ const Aside = () => {
                             </Link>
                         </li>
 
+                        <li className="menu-item">
+                            <Link className="menu-link" to={ROUTES.UI.REFERENCES}>
+                                {t("Referanslar")}
+                            </Link>
+                        </li>
+
                         {/* <li className="menu-item">
                             <Link className="menu-link" to={ROUTES.UI.CAMPAIGN}>
                                 {t('Kampanyalar')}

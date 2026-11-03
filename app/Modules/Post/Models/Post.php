@@ -71,8 +71,8 @@ class Post extends Model
         // Rezervasyon Date filtresi
         $query = $this->applyReservationDateFilter($query, $filters);
 
-        // Price Dtae filtresi
-        $query = $this->applyPriceDateFilter($query, $filters);
+        // Fiyat tablosu tarih bazlı değil (yıl/km paketleri); tarih uygunluğu rezervasyon filtresiyle kontrol ediliyor
+        // $query = $this->applyPriceDateFilter($query, $filters);
 
         // Price filtresi bu daha kurgulanmadı
         // $query = $this->applyPriceFilter($query, $filters);
@@ -94,7 +94,7 @@ class Post extends Model
         $query = $this->applyAttributeFilter($query, $filters);
         $query = $this->applyDetailFilter($query, $filters);
         $query = $this->applyReservationDateFilter($query, $filters);
-        $query = $this->applyPriceDateFilter($query, $filters);
+        // $query = $this->applyPriceDateFilter($query, $filters);
         $query = $this->applyPasifStatusFilter($query, $filters); // 👈 Özel status filtresi
 
         return $query;
@@ -380,10 +380,30 @@ class Post extends Model
 
     public function getMinFuturePrice(): float
     {
+        // withCardRelations() ile yüklendiyse tekrar sorgu atma
+        if (array_key_exists('prices_min_price', $this->attributes)) {
+            return (float) ($this->attributes['prices_min_price'] ?? 0);
+        }
+
         return (float) (
             $this->prices()
             ->min('price') ?? 0
         );
+    }
+
+    /**
+     * İlan kartı (PostCardResource) için gereken ilişkileri tek seferde yükler (N+1 önler).
+     */
+    public function scopeWithCardRelations($query)
+    {
+        return $query->with([
+            'media',
+            'region.parentCity',
+            // Puan ve yorum sayısına sadece onaylı yorumlar dahil
+            'comments' => fn ($q) => $q->where('status', 'approved')->select('id', 'post_id', 'rating'),
+            'postHasAttrs.attr.infoRelation',
+            'postHasAttrs.attr.media',
+        ])->withMin('prices', 'price');
     }
     // Post.php modeline ekle
     public function postGalleries()

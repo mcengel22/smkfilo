@@ -44,8 +44,19 @@ class AuthController extends Controller
         // Kullanıcıyı bul
         $user = User::where('email', $request->email)->first();
 
+        // Eski sistemden gelen $2a$ bcrypt hash'leri Hash::check hata fırlatıyor; password_verify ile doğrulanıp yenileniyor
+        $isLegacyHash = $user && str_starts_with((string) $user->password, '$2a$');
+        $passwordValid = $user && ($isLegacyHash
+            ? password_verify($request->password, $user->password)
+            : Hash::check($request->password, $user->password));
+
+        if ($passwordValid && $isLegacyHash) {
+            $user->password = $request->password; // mutator yeniden hashler
+            $user->save();
+        }
+
         // login
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$passwordValid) {
             return response()->json([
                 'message' => self::INCORRECT_CREDENTIALS,
                 'error_code' => 'AUTH_INVALID_CREDENTIALS',

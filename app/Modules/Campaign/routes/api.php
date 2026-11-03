@@ -8,8 +8,8 @@ Route::group([
     'as' => 'v1.campaign',
 ], static function () {
     Route::get('/', [CampaignController::class, 'index'])->name('index'); // Listeleme
-    Route::post('/', [CampaignController::class, 'store'])->name('store')->middleware('auth:sanctum');
+    Route::post('/', [CampaignController::class, 'store'])->name('store')->middleware(['auth:sanctum', 'role:super_admin']);
     Route::get('/{id}', [CampaignController::class, 'show'])->name('show'); // Tekil veri getir
-    Route::post('/{slug}', [CampaignController::class, 'update'])->name('update')->middleware('auth:sanctum'); // Güncelleme
-    Route::delete('/{id}', [CampaignController::class, 'destroy'])->name('destroy')->middleware('auth:sanctum'); // Silme
+    Route::post('/{slug}', [CampaignController::class, 'update'])->name('update')->middleware(['auth:sanctum', 'role:super_admin']); // Güncelleme
+    Route::delete('/{id}', [CampaignController::class, 'destroy'])->name('destroy')->middleware(['auth:sanctum', 'role:super_admin']); // Silme
 });

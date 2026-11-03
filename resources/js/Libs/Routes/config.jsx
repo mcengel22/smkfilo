@@ -46,6 +46,7 @@ export const ROUTES = {
         RESERVATIONSLIST: '/Panel/Rezervasyonlarim',
         RESERVATIONCREATE: '/Panel/RezervasyonOlustur',
         SHOWCASE: '/Panel/Vitrin',
+        REFERENCES: '/Panel/Referanslar',
         SHOWCASEEDIT: '/Panel/VitrinDuzenle',
         COMMUNICATION: '/Panel/IletisimForm',
         CATEGORY: '/Panel/IlanTipleri',

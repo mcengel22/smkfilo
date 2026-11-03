@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
-import PasswordStrengthBar from 'react-password-strength-bar';
+import PasswordStrengthBar from "@/Components/UI/Misc/PasswordStrength.jsx";
 import { ROUTES } from "@/Libs/Routes/config.jsx";
 import {useSelector} from "react-redux";
 import { useAuth } from "../../ServerSide/Hooks/Auth/useAuth";

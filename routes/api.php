@@ -12,8 +12,8 @@ use App\Http\Controllers\DealerController;
 Route::prefix('v1')->group(function () {
 
     Route::get('/reports/statistics', [ReportsController::class, 'statistics'])
-        ->name('reports.statistics');
-    Route::post('/send-sms', [SmsController::class, 'send']);
+        ->name('reports.statistics')->middleware(['auth:sanctum', 'role:super_admin']);
+    Route::post('/send-sms', [SmsController::class, 'send'])->middleware(['auth:sanctum', 'role:super_admin']);
     // Kullanıcı Girişi
     Route::post('Giris', [AuthController::class, 'login'])->name('login');
     Route::post('TokenYenile', [AuthController::class, 'refreshToken'])->name('token.refresh')->middleware('auth:sanctum');
@@ -36,9 +36,11 @@ Route::prefix('v1')->group(function () {
     });
 
     // Dealer routes
-    Route::get('/dealers', [DealerController::class, 'index'])->name('dealers.index');
-    Route::get('/dealers/{id}/statistics', [DealerController::class, 'statistics'])->name('dealers.statistics');
-    Route::get('/dealers/{id}/payment-plans', [DealerController::class, 'paymentPlanHistory'])->name('dealers.payment-plans.history');
+    Route::middleware(['auth:sanctum', 'role:super_admin'])->group(function () {
+        Route::get('/dealers', [DealerController::class, 'index'])->name('dealers.index');
+        Route::get('/dealers/{id}/statistics', [DealerController::class, 'statistics'])->name('dealers.statistics');
+        Route::get('/dealers/{id}/payment-plans', [DealerController::class, 'paymentPlanHistory'])->name('dealers.payment-plans.history');
+    });
 
     Route::prefix('payten')->group(function () {
         Route::post('create-payment', [IyzicoController::class, 'showHashRequest']);

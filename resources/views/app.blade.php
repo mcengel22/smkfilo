@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{-- 🔹 Dinamik Title --}}
-    <title>{{ $initialSeo['meta_title'] ?? 'Araç Kiralama - Hemen Aracınıı Kirala' }}</title>
+    <title>{{ $initialSeo['meta_title'] ?? 'Araç Kiralama - Hemen Aracını Kirala' }}</title>
 
     {{-- 🔹 Description --}}
     <meta name="description"
@@ -31,9 +31,15 @@
     <meta name="twitter:description" content="{{ $initialSeo['meta_description'] ?? 'Araç Kiralama' }}">
     <meta name="twitter:image" content="{{ $initialSeo['media']['url'] ?? asset('img/smkfavicon.png') }}">
 
-    {{-- 🔹 Fonts --}}
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    {{-- 🔹 Fonts (CSS içinden @import yerine burada: render'ı bloklamaz, paralel iner) --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Montez&display=swap" rel="stylesheet">
+
+    {{-- 🔹 Ana sayfa hero görseli erken yüklensin --}}
+    @if (request()->is('/'))
+        <link rel="preload" as="image" href="/img/banner/rentacar.webp" fetchpriority="high">
+    @endif
 
     {{-- 🔹 Favicon --}}
     <link rel="icon" type="image/png" sizes="124x124" href="{{ asset('img/smkfavicon.png') }}">

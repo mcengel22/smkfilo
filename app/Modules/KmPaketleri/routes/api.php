@@ -9,8 +9,8 @@ Route::group([
     // 'middleware' => ['auth:sanctum'],
 ], static function () {
     Route::get('/', [KmPaketleriController::class, 'index'])->name('index');
-    Route::post('/', [KmPaketleriController::class, 'store'])->name('store');
+    Route::post('/', [KmPaketleriController::class, 'store'])->name('store')->middleware(['auth:sanctum', 'role:super_admin']);
     Route::get('/{id}', [KmPaketleriController::class, 'show'])->name('show');
-    Route::put('/{id}', [KmPaketleriController::class, 'update'])->name('update');
-    Route::delete('/{id}', [KmPaketleriController::class, 'destroy'])->name('destroy');
+    Route::put('/{id}', [KmPaketleriController::class, 'update'])->name('update')->middleware(['auth:sanctum', 'role:super_admin']);
+    Route::delete('/{id}', [KmPaketleriController::class, 'destroy'])->name('destroy')->middleware(['auth:sanctum', 'role:super_admin']);
 });

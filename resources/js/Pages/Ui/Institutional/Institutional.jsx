@@ -21,7 +21,7 @@ const Institutional = () => {
                     bg-center
                 "
                 style={{
-                    backgroundImage: "url('/img/banner/rentacar.png')",
+                    backgroundImage: "url('/img/banner/rentacar.webp')",
                 }}
             >
                 <div
@@ -250,7 +250,7 @@ const Institutional = () => {
                     {/* IMAGE */}
                     <div>
                         <img
-                            src="/img/banner/rentacar.png"
+                            src="/img/banner/rentacar.webp"
                             alt="SMK Filo"
                             className="
                                 rounded-[32px]

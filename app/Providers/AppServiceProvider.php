@@ -25,6 +25,7 @@ use App\Modules\User\Models\User;
 use App\Modules\User\Observers\UserObserver;
 use App\Modules\User\Providers\UserServiceProvider;
 use App\Modules\KmPaketleri\Providers\KmPaketleriServiceProvider;
+use App\Modules\Reference\Providers\ReferenceServiceProvider;
 use App\Services\NetGSMService;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -77,6 +78,7 @@ class AppServiceProvider extends ServiceProvider
     // Register services
         $this->app->register(PoliciesServiceProvider::class);
         $this->app->register(KmPaketleriServiceProvider::class);
+        $this->app->register(ReferenceServiceProvider::class);
         Schema::defaultStringLength(191);
     }
     /**

@@ -64,6 +64,12 @@ class UserController extends Controller
     {
         return $this->handleApiExceptions(function () use ($id, $request) {
             $validatedData = $request->validated();
+
+            // Boş şifre mevcut şifreyi silmesin
+            if (empty($validatedData['password'])) {
+                unset($validatedData['password']);
+            }
+
             $user = $this->userService->update($id, $validatedData);
             return $this->updatedResponse($user);
         });
@@ -72,11 +78,16 @@ class UserController extends Controller
     public function updateMe(UserRequest $request): JsonResponse
     {
         return $this->handleApiExceptions(function () use ($request) {
-            $validatedData = $request->validated();
+            // Kullanıcı kendi rolünü, bayi ve komisyon bilgilerini değiştiremez
+            $validatedData = collect($request->validated())->except([
+                'type', 'is_dealer', 'dealer_code', 'dealer_status',
+                'dealer_start_date', 'dealer_end_date', 'is_commissioned_user',
+            ])->all();
 
-            // Şifre geldiyse burada hashliyoruz! 💪
-            if (isset($validatedData['password'])) {
-                $validatedData['password'] = Hash::make($validatedData['password']);
+            // Şifre User modelindeki mutator ile hashleniyor; burada tekrar hashlenmemeli.
+            // Boş şifre mevcut şifreyi silmesin.
+            if (empty($validatedData['password'])) {
+                unset($validatedData['password']);
             }
 
             $user = $this->userService->updateAuthenticated($validatedData);

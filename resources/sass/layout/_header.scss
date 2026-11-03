@@ -629,7 +629,6 @@ header {
 .home {
     header {
         width: 100%;
-        background: url(/img/banner/banner.jpg);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -646,7 +645,7 @@ header {
         .detail-page {
             header {
                 height: 700px;
-                background: url("/public/img/banner/kurumsal-bg.webp");
+                background: url("../../../public/img/banner/kurumsal-bg.webp");
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-position: center;
@@ -713,7 +712,6 @@ header {
 .inner-page {
     header {
         width: 100%;
-        background: url(/img/banner/banner.jpg);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;

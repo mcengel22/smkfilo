@@ -4,6 +4,6 @@ export const MEDIA = {
     FAVICON: "/img/smkfavicon.png",
 
     AUTH: {
-        BG: "/img/banner/rentacar.png",
+        BG: "/img/banner/rentacar.webp",
     },
 };

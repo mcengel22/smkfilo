@@ -276,7 +276,7 @@ const About = () => {
                         {/* RIGHT */}
                         <div className="relative">
                             <img
-                                src="/img/banner/rentacar.png"
+                                src="/img/banner/rentacar.webp"
                                 alt="SMK Filo"
                                 className="
                                     rounded-[32px]

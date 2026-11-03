@@ -8,9 +8,9 @@ Route::group([
     'as' => 'v1.contactform',
     //    'middleware' => ['auth:sanctum'],
 ], static function () {
-    Route::get('/', [ContactFormController::class, 'index'])->name('index'); // Listeleme
+    Route::get('/', [ContactFormController::class, 'index'])->name('index')->middleware(['auth:sanctum', 'role:super_admin']); // Listeleme
     Route::post('/', [ContactFormController::class, 'store'])->name('store'); // Ekleme
-    Route::get('/{id}', [ContactFormController::class, 'show'])->name('show'); // Tekil veri getir
-    Route::put('/{id}', [ContactFormController::class, 'update'])->name('update'); // Güncelleme
-    Route::delete('/{id}', [ContactFormController::class, 'destroy'])->name('destroy'); // Silme
+    Route::get('/{id}', [ContactFormController::class, 'show'])->name('show')->middleware(['auth:sanctum', 'role:super_admin']); // Tekil veri getir
+    Route::put('/{id}', [ContactFormController::class, 'update'])->name('update')->middleware(['auth:sanctum', 'role:super_admin']); // Güncelleme
+    Route::delete('/{id}', [ContactFormController::class, 'destroy'])->name('destroy')->middleware(['auth:sanctum', 'role:super_admin']); // Silme
 });

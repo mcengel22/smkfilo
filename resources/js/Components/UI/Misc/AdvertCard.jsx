@@ -4,26 +4,21 @@ import { useTranslation } from "react-i18next";
 import { ROUTES } from "../../../Libs/Routes/config";
 import { useSelector } from "react-redux";
 import { useFavorite } from "../../../ServerSide/Hooks/useFavorite";
-import Swal from "sweetalert2";
+import { loadSwal } from "@/Libs/Global/swal.js";
+
+// 48500 -> "48.500 ₺"
+const formatPrice = (value) =>
+    `${Number(value || 0).toLocaleString("tr-TR", { maximumFractionDigits: 0 })} ₺`;
 
 const AdvertCard = ({ data }) => {
-    if (!data) return null;
-
+    // Hook'lar her render'da aynı sırada çağrılmalı; erken return'den önce gelmeli
     const { t } = useTranslation();
     const navigate = useNavigate();
     const user = useSelector((state) => state.auth.user);
     const { processFavorite } = useFavorite();
-    const [isFavorite, setIsFavorite] = useState(data.favorite ?? false);
+    const [isFavorite, setIsFavorite] = useState(data?.favorite ?? false);
 
-    const items = [
-        {
-            features: data.details.map((detail) => ({
-                icon: detail.icon,
-                name: detail.title,
-                value: detail.value,
-            })),
-        },
-    ];
+    if (!data) return null;
 
     const handleImageError = (e) => {
         const target = e.currentTarget;
@@ -34,7 +29,7 @@ const AdvertCard = ({ data }) => {
 
     const handleToggleFavorite = async () => {
         if (!user) {
-            const sonuc = await Swal.fire({
+            const sonuc = await (await loadSwal()).fire({
                 title: t("Favorilere eklemek ister misiniz?"),
                 text: t(
                     "Bu özelliği kullanabilmek için önce giriş yapmanız gerekiyor.",
@@ -98,38 +93,43 @@ const AdvertCard = ({ data }) => {
             </div>
 
             <div className="detail">
-                <div className="rating">
-                    <span className="rating-count">
-                        {[...Array(5)].map((_, i) => (
-                            <i
-                                className={`icon star ${i < Math.round(data.rating) ? "checked" : ""}`}
-                                key={i}
-                            ></i>
-                        ))}
-                    </span>
-                    <p className="rating-review">
-                        <span className="me-1">{Math.round(data.rating)}</span>{" "}
-                        ({data.comments_count} Yorum)
-                    </p>
-                </div>
+                {/* Hiç yorum yoksa boş yıldız/0 Yorum göstermiyoruz */}
+                {data.comments_count > 0 && (
+                    <div className="rating">
+                        <span className="rating-count">
+                            {[...Array(5)].map((_, i) => (
+                                <i
+                                    className={`icon star ${i < Math.round(data.rating) ? "checked" : ""}`}
+                                    key={i}
+                                ></i>
+                            ))}
+                        </span>
+                        <p className="rating-review">
+                            <span className="me-1">{Math.round(data.rating)}</span>{" "}
+                            ({data.comments_count} Yorum)
+                        </p>
+                    </div>
+                )}
 
                 <div className="mb-2">
-                    <div className="name">
+                    <div className="name" title={data.title}>
                         <Link to={`${ROUTES.UI.DETAIL}/${data.slug}`}>
                             {data.title}
                         </Link>
                     </div>
-                    <div className="location">
-                        <i className="icon map"></i>
-                        {data.city}/{data.district}
-                    </div>
+                    {(data.city || data.district) && (
+                        <div className="location">
+                            <i className="icon map"></i>
+                            {[data.city, data.district].filter(Boolean).join(" / ")}
+                        </div>
+                    )}
                 </div>
 
                 <div className="price">
                     <span className="priceTitle">
-                        ₺ {data.min_price} /
+                        {formatPrice(data.min_price)}
                         <span className="text-gray-500">
-                            Başlayan Fiyatlarla
+                            {t("Başlayan fiyatlarla")}
                         </span>
                     </span>
                 </div>

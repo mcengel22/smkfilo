@@ -1,11 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import HeaderMenu from "../../../../Components/UI/Header/HeaderMenu";
-import HomeFilter from "./HomeFilter";
+import { ROUTES } from "../../../../Libs/Routes/config";
+import { updateFilters } from "../../../../Repo/Redux/Modules/FilterSlice";
 
 const HomeSlider = () => {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const filters = useSelector((state) => state.filter.filters);
+
+    // Listing sayfası ilan tipini (type) bekliyor; ilk girişte tek istek atılsın diye burada set ediliyor
+    const goToListing = () => {
+        dispatch(updateFilters({ type: filters?.type || "villa", pagination: { pageNumber: 1 } }));
+        navigate(ROUTES.UI.LISTING);
+    };
     const [menuActive, setMenuActive] = useState(false);
     const [subMenu, setSubMenu] = useState(null);
     const [menuTitle, setMenuTitle] = useState("");
@@ -65,7 +76,7 @@ const HomeSlider = () => {
                     className="absolute inset-0 bg-center bg-cover"
                     style={{ backgroundImage: "url(/img/banner/rentacar.webp)" }}
                 />
-                <div className="absolute inset-0 bg-black opacity-30" />
+                <div className="hero-overlay" />
                 {/*/!* 2️⃣ Poster atributeli video *!/*/}
                 {/*<video*/}
                 {/*    poster="/img/banner/fallback.png"*/}
@@ -119,67 +130,28 @@ const HomeSlider = () => {
                         </nav>
                     </div>
                 </div>
-                {/* MOBILE LOGO */}
-                <div className="absolute top-4 right-4 z-50 md:hidden">
-                    <Link to="/">
-                        <img
-                            src="/img/logo/filologo.webp"
-                            alt="Logo"
-                            className="h-[60px] w-[160px] object-contain"
-                            style={{ filter: "brightness(0) invert(1)" }}
-                        />
-                    </Link>
-                </div>
-                <div className="banner">
-                    <div>
-                        {/* <div className="tursab">
-                            <p>tatilmerasi.com Turizm Seyahat Acentası Belge No: 14735</p>
-                        </div> */}
-<div
-    className="
-        banner-inf
-        !left-0 !ml-0
-        !w-full
-        px-4
-        md:!w-full
-        md:px-0
-    "
->
-                            <div className="text-center w-full">
+                {/* Mobil logo artık üst barda (renkli) gösteriliyor */}
+                <div className="hero">
+                    <div className="hero-inner">
+                        <span className="hero-eyebrow">
+                            <i className="icon check" />
+                            {t("SMK Filo Araç Kiralama")}
+                        </span>
 
-                               <h1
-    className="
-        main-title
-        mt-20
-        text-center
-        font-extrabold
-        text-[21px]
-        leading-[24px]
-        text-white
-        sm:text-4xl
-        md:mt-10
-        md:text-6xl
-        md:leading-tight
-        lg:text-7xl
-    "
->
-    {t('YOLA ÇIKMANIN EN KOLAY YOLU,')}
-    <span className="text-primary block">
-        {t('GÜVENİLİR ARAÇ KİRALAMA!')}
-    </span>
-</h1>
+                        <h1 className="hero-title">
+                            {t("Yola çıkmanın en kolay yolu,")}
+                            <span>{t("güvenilir araç kiralama")}</span>
+                        </h1>
 
-                                <p className="sub-title mt-4 text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-200 leading-relaxed max-w-3xl mx-auto">
-                                    {t('Geniş araç filomuz, uygun fiyatlarımız ve hızlı rezervasyon sistemimizle')}
-                                    <span className="font-semibold text-white">
-                                        {t(' istediğiniz aracı saniyeler içinde kiralayın!')}
-                                    </span>
-                                </p>
+                        <p className="hero-text">
+                            {t("Geniş araç filomuz, uygun fiyatlarımız ve hızlı rezervasyon sistemimizle istediğiniz aracı saniyeler içinde kiralayın.")}
+                        </p>
 
-                            </div>
-                        </div>
-                        <div className="banner-filter">
-                            <HomeFilter />
+                        <div className="hero-actions">
+                            <button type="button" className="hero-btn hero-btn--primary" onClick={goToListing}>
+                                <i className="icon search" />
+                                {t("Tüm Araçları İncele")}
+                            </button>
                         </div>
                     </div>
                 </div>

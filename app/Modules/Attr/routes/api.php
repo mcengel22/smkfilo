@@ -8,10 +8,10 @@ Route::group([
     'as' => 'attr',
 ], static function () {
     Route::group(['middleware' => ['auth:sanctum']], static function () {
-        Route::post('/', [AttrController::class, 'store'])->name('store'); // Ekleme
+        Route::post('/', [AttrController::class, 'store'])->name('store')->middleware(['auth:sanctum', 'role:super_admin']); // Ekleme
         Route::get('/{slug}', [AttrController::class, 'show'])->name('show'); // Tekil veri getir
-        Route::post('/{slug}', [AttrController::class, 'update'])->name('update'); // Güncelleme
-        Route::delete('/{id}', [AttrController::class, 'destroy'])->name('destroy'); // Silme
+        Route::post('/{slug}', [AttrController::class, 'update'])->name('update')->middleware(['auth:sanctum', 'role:super_admin']); // Güncelleme
+        Route::delete('/{id}', [AttrController::class, 'destroy'])->name('destroy')->middleware(['auth:sanctum', 'role:super_admin']); // Silme
     });
     Route::get('/', [AttrController::class, 'index'])->name('index'); // Listeleme
      Route::get('/type/{attrType}', [AttrController::class, 'getByType'])->name('getByType'); //attr_type a göre listeleme(features,rules..)

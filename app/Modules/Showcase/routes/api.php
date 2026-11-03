@@ -9,9 +9,9 @@ Route::group([
     //    'middleware' => ['auth:sanctum'],
 ], static function () {
     Route::get('/', [ShowcaseController::class, 'index'])->name('index'); // Listeleme
-    Route::post('/', [ShowcaseController::class, 'store'])->name('store'); // Ekleme
+    Route::post('/', [ShowcaseController::class, 'store'])->name('store')->middleware(['auth:sanctum', 'role:super_admin']); // Ekleme
     Route::get('/{id}', [ShowcaseController::class, 'show'])->name('show'); // Tekil veri getir
-    Route::put('/{id}', [ShowcaseController::class, 'update'])->name('update'); // Güncelleme
-    Route::delete('/{id}', [ShowcaseController::class, 'destroy'])->name('destroy'); // Silme
-    Route::put('/{id}/sort-order', [ShowcaseController::class, 'updateSortOrder'])->name('updateSortOrder'); // Sort order güncelleme
+    Route::put('/{id}', [ShowcaseController::class, 'update'])->name('update')->middleware(['auth:sanctum', 'role:super_admin']); // Güncelleme
+    Route::delete('/{id}', [ShowcaseController::class, 'destroy'])->name('destroy')->middleware(['auth:sanctum', 'role:super_admin']); // Silme
+    Route::put('/{id}/sort-order', [ShowcaseController::class, 'updateSortOrder'])->name('updateSortOrder')->middleware(['auth:sanctum', 'role:super_admin']); // Sort order güncelleme
 });

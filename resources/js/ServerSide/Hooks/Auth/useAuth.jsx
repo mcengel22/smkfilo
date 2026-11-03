@@ -81,14 +81,14 @@ export const useAuth = () => {
             const token = localStorage.getItem('token');
 
             if (!token) {
-                setAuthChecked();
+                dispatch(setAuthChecked());
                 resolve(false);
                 return;
             }
 
             if (isAuthChecked && token) {
-                console.log('Önceden kontrol edilmiş');
-                return true;
+                resolve(true);
+                return;
             }
 
 
@@ -104,6 +104,7 @@ export const useAuth = () => {
             } catch (error) {
                 console.error('Auth kontrolü hatası:', error);
                 localStorage.removeItem('token');
+                dispatch(setAuthChecked());
                 resolve(false);
             }
         });

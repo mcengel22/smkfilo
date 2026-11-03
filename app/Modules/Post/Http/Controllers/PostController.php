@@ -13,6 +13,7 @@ use App\Modules\Post\Services\PostService;
 use App\Modules\Post\Http\Requests\PostRequest;
 use App\Modules\Post\Http\Resources\PostCardResource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Auth\Access\AuthorizationException;
 use App\Traits\HandlesApiExceptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -29,6 +30,18 @@ class PostController extends Controller
     public function __construct(PostService $postService)
     {
         $this->postService = $postService;
+    }
+
+    /**
+     * İlanı sadece sahibi veya süper admin değiştirebilir.
+     */
+    private function authorizeOwner(Post $post): void
+    {
+        $user = auth()->user();
+
+        if (!$user || ($user->type !== 'super_admin' && (int) $post->user_id !== (int) $user->id)) {
+            throw new AuthorizationException('Bu ilan üzerinde işlem yetkiniz yok.');
+        }
     }
 
     public function index(): JsonResponse
@@ -87,6 +100,8 @@ class PostController extends Controller
     {
         return $this->handleApiExceptions(function () use ($slug, $request) {
 
+            $this->authorizeOwner(Post::where('slug', $slug)->firstOrFail());
+
             $validatedData = $request->validated();
 
             // ⭐ KAPAK RESMİNİ AYRI AL
@@ -119,6 +134,7 @@ class PostController extends Controller
     public function destroy($id): JsonResponse
     {
         return $this->handleApiExceptions(function () use ($id) {
+            $this->authorizeOwner(Post::findOrFail($id));
             $this->postService->delete($id);
         return $this->deletedResponse();
         });
@@ -138,6 +154,7 @@ class PostController extends Controller
 
         // 🔥 Sadece aktifleri getirir çünkü filters status=1 setliyor
         $posts = Post::filters($request->all())
+            ->withCardRelations()
             ->orderBy($orderBy, $orderDirection)
             ->paginate($perPage, ['*'], $pName, $page);
 
@@ -173,6 +190,7 @@ class PostController extends Controller
     public function toggleStatus($id): JsonResponse
     {
         return $this->handleApiExceptions(function () use ($id) {
+            $this->authorizeOwner(Post::findOrFail($id));
             $post = $this->postService->toggleStatus($id);
             return $this->successResponse($post);
         });

@@ -10,16 +10,19 @@ Route::prefix('api/v1/Kullanici')->group(function () {
         Route::put('/me', [UserController::class, 'updateMe']);   // Giriş yapan kullanıcıyı güncelle
     });
 
-    Route::get('/', [UserController::class, 'index']); // Listeleme
-    Route::get('/{id}', [UserController::class, 'show']);       // Giriş yapan kullanıcıyı getir
-    Route::post('/', [UserController::class, 'store']); // Ekleme
-    Route::put('/{id}', [UserController::class, 'update']); // ID ile güncelleme
-    Route::delete('/{id}', [UserController::class, 'destroy']); // Silme
-    Route::get('/{id}/payment-plans', [UserController::class, 'paymentPlans']);
-    Route::get('/payment-plans/{planId}', [UserController::class, 'showPaymentPlan']);
+    // 🔐 Kullanıcı yönetimi sadece süper admin
+    Route::middleware(['auth:sanctum', 'role:super_admin'])->group(function () {
+        Route::get('/', [UserController::class, 'index']); // Listeleme
+        Route::get('/{id}', [UserController::class, 'show']);       // Kullanıcıyı getir
+        Route::post('/', [UserController::class, 'store']); // Ekleme
+        Route::put('/{id}', [UserController::class, 'update']); // ID ile güncelleme
+        Route::delete('/{id}', [UserController::class, 'destroy']); // Silme
+        Route::get('/{id}/payment-plans', [UserController::class, 'paymentPlans']);
+        Route::get('/payment-plans/{planId}', [UserController::class, 'showPaymentPlan']);
 
-    Route::post('/{id}/payment-plans', [UserController::class, 'storePaymentPlan']);
-    Route::put('/payment-plans/{planId}', [UserController::class, 'updatePaymentPlan']);
+        Route::post('/{id}/payment-plans', [UserController::class, 'storePaymentPlan']);
+        Route::put('/payment-plans/{planId}', [UserController::class, 'updatePaymentPlan']);
 
-    Route::delete('/payment-plans/{planId}', [UserController::class, 'deletePaymentPlan']);
+        Route::delete('/payment-plans/{planId}', [UserController::class, 'deletePaymentPlan']);
+    });
 });

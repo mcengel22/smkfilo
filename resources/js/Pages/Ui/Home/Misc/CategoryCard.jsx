@@ -1,18 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const CategoryCard = ({category,onClick}) => {
+// Panelden kategoriye kapak görseli eklenirse kart onu gösterir, yoksa marka renginde degrade
+const CategoryCard = ({ category, onClick }) => {
     const { t } = useTranslation();
+    const cover = category?.cover?.media_url;
+
     return (
-        <div className="card">
-            <Link to="#" onClick={(e) => onClick(e, category?.slug)}>
-
-
-                <i className={category?.info?.icon_class ? category?.info?.icon_class : 'icon house'} />
-                <span>{t(category.title)}</span>
-            </Link>
-        </div>
+        <button
+            type="button"
+            className={`category-card ${cover ? "has-cover" : ""}`}
+            onClick={(e) => onClick(e, category?.slug)}
+            style={cover ? { backgroundImage: `url(${cover})` } : undefined}
+        >
+            <span className="category-card-body">
+                <span className="category-card-title">{t(category.title)}</span>
+                <span className="category-card-link">
+                    {t("Araçları keşfet")}
+                    <i className="icon arrow-right" />
+                </span>
+            </span>
+        </button>
     );
 };
 

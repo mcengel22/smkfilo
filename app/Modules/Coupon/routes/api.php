@@ -8,11 +8,11 @@ Route::group([
     'as' => 'v1.coupon',
     'middleware' => ['auth:sanctum'],
 ], static function () {
-    Route::get('/', [CouponController::class, 'index'])->name('index'); // Listeleme
-    Route::post('/', [CouponController::class, 'store'])->name('store'); // Ekleme
-    Route::get('/{id}', [CouponController::class, 'show'])->name('show'); // Tekil veri getir
-    Route::put('/{id}', [CouponController::class, 'update'])->name('update'); // Güncelleme
-    Route::delete('/{id}', [CouponController::class, 'destroy'])->name('destroy'); // Silme
+    Route::get('/', [CouponController::class, 'index'])->name('index')->middleware(['auth:sanctum', 'role:super_admin']); // Listeleme
+    Route::post('/', [CouponController::class, 'store'])->name('store')->middleware(['auth:sanctum', 'role:super_admin']); // Ekleme
+    Route::get('/{id}', [CouponController::class, 'show'])->name('show')->middleware(['auth:sanctum', 'role:super_admin']); // Tekil veri getir
+    Route::put('/{id}', [CouponController::class, 'update'])->name('update')->middleware(['auth:sanctum', 'role:super_admin']); // Güncelleme
+    Route::delete('/{id}', [CouponController::class, 'destroy'])->name('destroy')->middleware(['auth:sanctum', 'role:super_admin']); // Silme
 });
 
 // Public coupon validation endpoint (no auth)

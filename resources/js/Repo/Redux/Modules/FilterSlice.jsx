@@ -1,7 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// Kayıtlı filtreleri güvenle oku: bozuk JSON uygulamayı çökertmesin,
+// eski sayfa numarası ve geçmiş tarih aralığı taşınmasın.
+const loadSavedFilters = () => {
+    try {
+        const saved = JSON.parse(localStorage.getItem('filters')) || {};
+        delete saved.pagination;
+
+        const endDate = saved.dateRange?.end_date;
+        if (endDate && new Date(endDate) < new Date(new Date().toDateString())) {
+            delete saved.dateRange;
+        }
+
+        return saved;
+    } catch (e) {
+        localStorage.removeItem('filters');
+        return {};
+    }
+};
+
 const initialState = {
-    filters: JSON.parse(localStorage.getItem('filters')) || {},
+    filters: loadSavedFilters(),
     loading: false,
 };
 

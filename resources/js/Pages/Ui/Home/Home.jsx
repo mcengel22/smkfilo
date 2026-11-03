@@ -1,12 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, lazy } from "react";
 import HomeSlider from "./Misc/HomeSlider";
-import Campaign from "./Misc/Campaign";
-import LocationCard from "./Misc/LocationCard";
 import CategoryCard from "./Misc/CategoryCard";
 import MobileArea from "./Misc/MobileArea";
+import References from "./Misc/References";
+import SectionHeading from "../../../Components/UI/Misc/SectionHeading";
 import Faq from "../../../Components/UI/Misc/Faq";
-import GetQuote from "./Misc/GetQuote";
-import BlogSlide from "../../../Components/UI/Misc/BlogSlide";
+import LazyOnView from "../../../Components/UI/Misc/LazyOnView";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import ShowcaseCarousel from "./Misc/ShowcaseCarousel";
@@ -16,6 +15,10 @@ import "swiper/css/navigation";
 import { setFilters } from "@/Repo/Redux/Modules/FilterSlice.jsx";
 import { ROUTES } from "@/Libs/Routes/config.jsx";
 import { useNavigate } from "react-router-dom";
+
+// Sayfanın altındaki ağır bölümler ayrı dosya olarak, ekrana yaklaşınca yüklenir
+const GetQuote = lazy(() => import("./Misc/GetQuote"));
+const BlogSlide = lazy(() => import("../../../Components/UI/Misc/BlogSlide"));
 
 const Home = () => {
     const swiperRef = useRef(null);
@@ -49,6 +52,7 @@ const Home = () => {
                     ...filters.attrs,
                     category: [category],
                 },
+                pagination: { pageNumber: 1 },
             };
             dispatch(setFilters(filterData));
             localStorage.setItem("filters", JSON.stringify(filterData));
@@ -66,14 +70,43 @@ const Home = () => {
             {/* Kampanyalar*/}
             {/* <Campaign /> */}
 
+            {/* Araç Türleri */}
+            {(attrIsLoading || categories.length > 0) && (
+                <section className="home-section home-categories">
+                    <div className="home-container">
+                        <SectionHeading
+                            eyebrow={t("Kategoriler")}
+                            title={t("Araç Türleri")}
+                            description={t("İhtiyacınıza uygun araç türünü seçin, size uygun araçları hemen listeleyelim.")}
+                        />
+                        {attrIsLoading ? (
+                            <div className="text-center text-gray-500">{t("Yükleniyor...")}</div>
+                        ) : (
+                            <div className="category-grid">
+                                {categories.map((category) => (
+                                    <CategoryCard
+                                        key={category.id || category.slug}
+                                        category={category}
+                                        onClick={onClickCategory}
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </section>
+            )}
+
             {/* Vitrin İlanlar */}
-            <section className="listing vitrins-listing">
-                <div className="max-w-8xl mx-auto sm:px-4 md:px-6 px-4">
+            <section className="home-section home-showcase listing vitrins-listing">
+                <div className="home-container">
+                    <SectionHeading
+                        eyebrow={t("Filomuz")}
+                        title={t("Öne Çıkan Araçlar")}
+                        description={t("En çok tercih edilen araçlarımıza göz atın, size uygun olanı hemen kiralayın.")}
+                    />
                     <ShowcaseCarousel showcases={showcases} />
                 </div>
             </section>
-
-            <div className="divider bg-gray-300 h-px mx-4 my-8"></div>
 
             {/* Popüler Bölgeler */}
             {/* <section className="location-area">
@@ -98,48 +131,30 @@ const Home = () => {
                 </div>
             </section> */}
 
-            {/* Villa Tipleri */}
-            <section className="rental-option">
-                <div className="max-w-8xl mx-auto sm:px-2 md:px-2">
-                    <div className="title">
-                        <h2>{t("Araç Türleri")}</h2>
-                        <div className="divider"></div>
-                    </div>
-                    {attrIsLoading ? (
-                        <div className="loader">Yükleniyor</div>
-                    ) : (
-                        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 custom-grid px-3">
-                            {categories.map((category, index) => (
-                                <CategoryCard
-                                    key={index}
-                                    category={category}
-                                    onClick={onClickCategory}
-                                />
-                            ))}
-                        </div>
-                    )}
+            {/* Çağrı bandı */}
+            <section className="home-section home-cta">
+                <div className="home-container">
+                    <MobileArea />
                 </div>
             </section>
 
-            {/* Mobil Alanı */}
-            <section className="mobile-area">
-                <MobileArea />
-            </section>
+            {/* Referanslar */}
+            <References />
 
             {/* SSS */}
-            <section className="faq">
-                <Faq />
-            </section>
+            <Faq />
 
-            {/* Teklif Al */}
-            <div>
+            {/* Teklif Al (form kütüphaneleri ekrana yaklaşınca yüklenir) */}
+            <LazyOnView minHeight={520}>
                 <GetQuote />
-            </div>
+            </LazyOnView>
 
             {/* Blog */}
             {!blogIsLoading && blogs && blogs.length > 0 && (
                 <section className="blog">
-                    <BlogSlide />
+                    <LazyOnView minHeight={360}>
+                        <BlogSlide />
+                    </LazyOnView>
                 </section>
             )}
         </div>

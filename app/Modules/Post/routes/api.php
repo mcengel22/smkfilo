@@ -20,5 +20,5 @@ Route::group([
     Route::get('/', [PostController::class, 'index'])->name('index'); // Listeleme
     Route::get('/{slug}', [PostController::class, 'show'])->name('show'); // Detay
     Route::get('/type/{type}', [PostController::class, 'getByType'])->name('getByType'); // Type'a göre filtreleme
-    Route::put('/{id}/toggle-status', [PostController::class, 'toggleStatus']);
+    Route::put('/{id}/toggle-status', [PostController::class, 'toggleStatus'])->middleware('auth:sanctum');
 });

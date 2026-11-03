@@ -15,7 +15,7 @@ const CampaignDetail = () => {
 
       <div className="hero">
         <img
-          src="/img/about/about-two.jpg"
+          src="/img/about/about-two.webp"
           alt=""
           className="hero-image rounded-lg"
           width={300}  // Resmin yeni genişliği

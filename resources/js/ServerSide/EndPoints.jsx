@@ -1,6 +1,6 @@
 export const API_CONFIG = {
-    BASE_URL: "http://127.0.0.1:8000",
-    //BASE_URL: 'https://tatilmerasi.com/',
+    // API, sayfayı sunan Laravel ile aynı adreste; farklı bir adres gerekirse .env içinde VITE_API_URL tanımlanır
+    BASE_URL: import.meta.env.VITE_API_URL || window.location.origin,
     ENDPOINTS: {
         AUTH: {
             LOGIN: "/api/v1/Giris",
@@ -35,6 +35,10 @@ export const API_CONFIG = {
         },
         FAQ: {
             FAQ: "api/v1/faq",
+        },
+        REFERENCE: {
+            REFERENCE: "api/v1/reference",
+            ADMIN: "api/v1/reference/admin",
         },
         BLOG: {
             BASE: "/v1/blog",

@@ -15,6 +15,10 @@ export default defineConfig({
         react(),
         tailwindcss(),
     ],
+    // MUI ve emotion tek kopya yüklensin ("@emotion/react already loaded" uyarısı)
+    resolve: {
+        dedupe: ['react', 'react-dom', '@emotion/react', '@emotion/styled'],
+    },
     // server: {
     //     cors: {
     //         origin: ['https://smkfilo.com.tr/', 'http://localhost:5173'],

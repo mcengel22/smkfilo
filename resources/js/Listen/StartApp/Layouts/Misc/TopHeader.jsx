@@ -7,7 +7,7 @@ import { useSearch } from "../../../../ServerSide/Hooks/useSearch";
 import { useDebounce } from "react-use";
 import { useSelector } from "react-redux";
 import { useAuth } from "../../../../ServerSide/Hooks/Auth/useAuth";
-import Swal from "sweetalert2";
+import { loadSwal } from "@/Libs/Global/swal.js";
 import { toast } from "react-toastify";
 
 const TopHeader = () => {
@@ -115,7 +115,7 @@ const TopHeader = () => {
     const handleLogout = async (e) => {
         e.preventDefault();
 
-        const result = await Swal.fire({
+        const result = await (await loadSwal()).fire({
             title: t("Emin misiniz?"),
             text: t("Çıkış yapmak üzeresiniz."),
             icon: "warning",
@@ -130,62 +130,13 @@ const TopHeader = () => {
                 navigate(ROUTES.AUTH.LOGIN);
                 toast.success(t("Çıkış yapıldı 👋"));
             } catch {
-                Swal.fire(t("Hata"), t("Çıkış yapılamadı!"), "error");
+                (await loadSwal()).fire(t("Hata"), t("Çıkış yapılamadı!"), "error");
             }
         }
     };
 
     return (
         <div className="top-bar">
-            <style>{`
-
-            .tursab-pill{
-                background:white;
-                padding:6px 14px;
-                border-radius:30px;
-                font-size:12px;
-                font-weight:600;
-                color:#374151;
-                margin-right:15px;
-                box-shadow:0 2px 6px rgba(0,0,0,0.08);
-                white-space:nowrap;
-            }
-
-            .top-menu{
-                display:flex;
-                align-items:center;
-                justify-content:space-between;
-            }
-
-            .wrap{
-                display:flex;
-                align-items:center;
-                gap:10px;
-            }
-.top-header-logo{
-    display:flex;
-    align-items:center;
-    width:150px;
-    height:75px;
-}
-
-.top-header-logo img{
-    width:190px;
-    height:100%;
-    object-fit:contain;
-    display:block;
-
-    filter: brightness(0) invert(1);
-}
-
-@media(max-width:768px){
-    .top-header-logo{
-        width:90px;
-        height:34px;
-    }
-}
-            `}</style>
-
             <div className="mx-auto px-3 sm:px-4 md:px-4">
                 <div className="top-menu">
                     <div className="wrap">
@@ -195,10 +146,18 @@ const TopHeader = () => {
                             onClick={scrollToTop}
                         >
                             <img
-                                src="/img/logo/smklogo.png"
-                                alt="RentaCar Logo"
+                                src="/img/logo/smklogo.webp"
+                                alt="SMK Filo"
+                                width="150"
+                                height="54"
                             />
                         </Link>
+
+                        <span className="top-tagline">
+                            <span className="top-tagline-dot" />
+                            {t("Araç Kiralamada")}{" "}
+                            <span className="top-tagline-muted">{t("Lider Filo")}</span>
+                        </span>
                     </div>
 
                     <div className="right-side flex items-center gap-3">
@@ -212,12 +171,10 @@ const TopHeader = () => {
                             </Link>
                         </button> */}
 
-                        <button className="btn btn-primary phone">
-                            📞{" "}
-                            <Link to="tel:+905555555555 ">
-                                +90 555 555 55 55{" "}
-                            </Link>
-                        </button>
+                        <a href="tel:+905305421233" className="top-phone" aria-label={t("Bizi arayın")}>
+                            <i className="icon call" />
+                            <span>+90 530 542 12 33</span>
+                        </a>
 
                         {/* {user && (
                             <div className="me-2">

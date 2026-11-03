@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
 import API_CONFIG from "@/ServerSide/EndPoints.jsx";
+import { apiService } from "@/ServerSide/Load.jsx";
 
 export const useFaqFront = (autoFetch = true) => {
     const [faqs, setFaqs] = useState([]);
@@ -19,7 +19,7 @@ export const useFaqFront = (autoFetch = true) => {
             setLoading(true);
             setError(null);
 
-            const response = await axios.get(FAQ_URL, {
+            const response = await apiService.get(FAQ_URL, {
                 params: {
                     page: 1,
                     per_page: 10,

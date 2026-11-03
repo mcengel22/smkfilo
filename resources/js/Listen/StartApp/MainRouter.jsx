@@ -1,114 +1,113 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { lazy } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import UiLayout from './Layouts/Ui';
 import HomePage from '../../Pages/Ui/Home/Home';
 import { ROUTES } from '../../Libs/Routes/config';
-import Listing from '../../Pages/Ui/Listing/Listing';
 import AuthLayout from "./Layouts/Auth";
-import Login from "../../Pages/Auth/Login";
-import Register from "../../Pages/Auth/Register";
-import ForgotPassword from "../../Pages/Auth/ForgotPassword";
-import TwoFactor from "../../Pages/Auth/TwoFactor";
-import ResetPassword from "../../Pages/Auth/ResetPassword";
-import Detail from '../../Pages/Ui/Detail/Detail';
-import BlogListing from '../../Pages/Ui/Blog/BlogListing';
-import BlogDetail from '../../Pages/Ui/Blog/BlogDetail';
-import CampaignListing from '../../Pages/Ui/Campaign/CampaignListing';
-import CampaignDetail from '../../Pages/Ui/Campaign/CampaignDetail';
-import About from '../../Pages/Ui/About/About';
-import Institutional from '../../Pages/Ui/Institutional/Institutional'
-import Contact from '../../Pages/Ui/Contact/Contact';
-import Agreements from '../../Pages/Ui/Agreements/Agreements';
-import PrivacyAgreement from '../../Pages/Ui/Agreements/Misc/PrivacyAgreement';
-import CancellationConditions from '../../Pages/Ui/Agreements/Misc/CancellationConditions';
-import RentalAgreemenmt from '../../Pages/Ui/Agreements/Misc/RentalAgreement';
-import Reservation from '../../Pages/Ui/Reservation/Reservation';
-import Payment from '../../Pages/Ui/Reservation/Payment';
-import Transfer from '../../Pages/Ui/Reservation/Transfer';
-import PaymentSuccess from '../../Pages/Ui/Reservation/Misc/PaymentSuccess';
-import PaymentError from '../../Pages/Ui/Reservation/Misc/PaymentError';
-import UserPanel from '../../Pages/Ui/UserPanel/UserPanel';
-import PostCreate from '../../Pages/Ui/UserPanel/Crud/PostCreate';
-import SuperAdmin from '../../Pages/Ui/UserPanel/SuperAdmin';
-import UserList from '../../Pages/Ui/UserPanel/SuperAdmin/Users/List';
-import UserCreate from '../../Pages/Ui/UserPanel/SuperAdmin/Users/Create';
-import UserEdit from '../../Pages/Ui/UserPanel/SuperAdmin/Users/Edit';
-import CampaignList from '../../Pages/Ui/UserPanel/SuperAdmin/Campaign/List';
-import CampaignCreate from '../../Pages/Ui/UserPanel/SuperAdmin/Campaign/Create';
-import Showcase from '../../Pages/Ui/UserPanel/SuperAdmin/Showcase/Create';
-import CommunicationList from '../../Pages/Ui/UserPanel/SuperAdmin/ContactForm/List';
-import ReservationList from '../../Pages/Ui/UserPanel/SuperAdmin/Reservation/List';
-import ReservationCreate from '../../Pages/Ui/UserPanel/SuperAdmin/Reservation/Create';
-import OperationsList from '../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Operation/List';
-import FeaturesList from '../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Features/List';
-import RulesList from '../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Rules/List';
-import CampaignEdit from '../../Pages/Ui/UserPanel/SuperAdmin/Campaign/Edit';
-import Coupon from '../../Pages/Ui/UserPanel/SuperAdmin/Coupon/Create';
-import CouponEdit from '../../Pages/Ui/UserPanel/SuperAdmin/Coupon/Edit';
-import ShowcaseEdit from '../../Pages/Ui/UserPanel/SuperAdmin/Showcase/Edit';
-import Comments from '../../Pages/Ui/UserPanel/SuperAdmin/Comments/List';
-import Kvkk from '../../Pages/Ui/Agreements/Misc/Kvkk';
-import ConsentText from '../../Pages/Ui/Agreements/Misc/ConsentText';
-import TermsOfUse from '../../Pages/Ui/Agreements/Misc/TermsOfUse';
 import PanelLayout from './Layouts/Panel';
-import MyAdvert from '../../Pages/Ui/UserPanel/Misc/Setting/MyAdvert';
-import UserReservation from '../../Pages/Ui/UserPanel/Misc/UserReservation';
-import UserReviews from '../../Pages/Ui/UserPanel/Misc/UserReviews';
-import UserSetting from '../../Pages/Ui/UserPanel/Misc/UserSetting';
-import UserFavorites from '../../Pages/Ui/UserPanel/Misc/UserFavorite';
-import CouponPage from '../../Pages/Ui/UserPanel/Misc/CouponPage';
 import { useSelector } from 'react-redux';
-import AttrCreate from "../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Misc/Create";
-import AttrEdit from "../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Misc/Edit";
-import CategoriesList from "../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Category/List";
-import NearbyList from '../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Nearby/List';
 import Loader from "@/Components/Loader.jsx";
-import PostEdit from "@/Pages/Ui/UserPanel/Crud/PostEdit.jsx";
-import ReservationManagement from "../../Pages/Ui/Reservation/ReservationManagement";
-import HomeRequestsList from "../../Pages/Ui/UserPanel/SuperAdmin/HomeRequests/List";
-import SeoList from "../../Pages/Ui/UserPanel/SuperAdmin/Seo/List";
-import SeoCreate from "../../Pages/Ui/UserPanel/SuperAdmin/Seo/Create";
-import SeoEdit from "../../Pages/Ui/UserPanel/SuperAdmin/Seo/Edit";
-import BlogList from "../../Pages/Ui/UserPanel/SuperAdmin/Blog/List";
-import BlogCreate from "../../Pages/Ui/UserPanel/SuperAdmin/Blog/Create";
-import BlogEdit from "../../Pages/Ui/UserPanel/SuperAdmin/Blog/Edit";
-import FaqList from "@/Pages/Ui/UserPanel/SuperAdmin/Faq/List.jsx";
-import FaqAdd from "@/Pages/Ui/UserPanel/SuperAdmin/Faq/Create.jsx";
-import FaqEdit from "@/Pages/Ui/UserPanel/SuperAdmin/Faq/Edit.jsx";
-import FvList from "@/Pages/Ui/UserPanel/SuperAdmin/Fvpopuler/List.jsx";
-import FvAdd from "@/Pages/Ui/UserPanel/SuperAdmin/Fvpopuler/Create.jsx";
-import FvEdit from "@/Pages/Ui/UserPanel/SuperAdmin/Fvpopuler/Edit.jsx";
-import PoliciesList from "@/Pages/Ui/UserPanel/SuperAdmin/Policies/PoliciesList.jsx";
-import Reports from "@/Pages/Ui/UserPanel/SuperAdmin/Reports/Reports.jsx";
-import SupportTicketList from '../../Pages/Ui/UserPanel/SuperAdmin/SupportTicket/List';
-import Dealers from '../../Pages/Ui/UserPanel/Dealers';
-import KmPackagesList from '../../Pages/Ui/UserPanel/SuperAdmin/KmPackages/List';
-import KmPackagesAdd from '../../Pages/Ui/UserPanel/SuperAdmin/KmPackages/Create';
-import KmPackagesEdit from '../../Pages/Ui/UserPanel/SuperAdmin/KmPackages/Edit';
+
+// Sayfalar ihtiyaç anında yüklenir (ana sayfa ve layoutlar hariç)
+const Listing = lazy(() => import('../../Pages/Ui/Listing/Listing'));
+const Login = lazy(() => import("../../Pages/Auth/Login"));
+const Register = lazy(() => import("../../Pages/Auth/Register"));
+const ForgotPassword = lazy(() => import("../../Pages/Auth/ForgotPassword"));
+const TwoFactor = lazy(() => import("../../Pages/Auth/TwoFactor"));
+const ResetPassword = lazy(() => import("../../Pages/Auth/ResetPassword"));
+const Detail = lazy(() => import('../../Pages/Ui/Detail/Detail'));
+const BlogListing = lazy(() => import('../../Pages/Ui/Blog/BlogListing'));
+const BlogDetail = lazy(() => import('../../Pages/Ui/Blog/BlogDetail'));
+const CampaignListing = lazy(() => import('../../Pages/Ui/Campaign/CampaignListing'));
+const CampaignDetail = lazy(() => import('../../Pages/Ui/Campaign/CampaignDetail'));
+const About = lazy(() => import('../../Pages/Ui/About/About'));
+const Institutional = lazy(() => import('../../Pages/Ui/Institutional/Institutional'));
+const Contact = lazy(() => import('../../Pages/Ui/Contact/Contact'));
+const Agreements = lazy(() => import('../../Pages/Ui/Agreements/Agreements'));
+const PrivacyAgreement = lazy(() => import('../../Pages/Ui/Agreements/Misc/PrivacyAgreement'));
+const CancellationConditions = lazy(() => import('../../Pages/Ui/Agreements/Misc/CancellationConditions'));
+const RentalAgreemenmt = lazy(() => import('../../Pages/Ui/Agreements/Misc/RentalAgreement'));
+const Reservation = lazy(() => import('../../Pages/Ui/Reservation/Reservation'));
+const Payment = lazy(() => import('../../Pages/Ui/Reservation/Payment'));
+const Transfer = lazy(() => import('../../Pages/Ui/Reservation/Transfer'));
+const PaymentSuccess = lazy(() => import('../../Pages/Ui/Reservation/Misc/PaymentSuccess'));
+const PaymentError = lazy(() => import('../../Pages/Ui/Reservation/Misc/PaymentError'));
+const UserPanel = lazy(() => import('../../Pages/Ui/UserPanel/UserPanel'));
+const PostCreate = lazy(() => import('../../Pages/Ui/UserPanel/Crud/PostCreate'));
+const SuperAdmin = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin'));
+const UserList = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Users/List'));
+const UserCreate = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Users/Create'));
+const UserEdit = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Users/Edit'));
+const CampaignList = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Campaign/List'));
+const CampaignCreate = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Campaign/Create'));
+const Showcase = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Showcase/Create'));
+const CommunicationList = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/ContactForm/List'));
+const ReservationList = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Reservation/List'));
+const ReservationCreate = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Reservation/Create'));
+const OperationsList = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Operation/List'));
+const FeaturesList = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Features/List'));
+const RulesList = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Rules/List'));
+const CampaignEdit = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Campaign/Edit'));
+const Coupon = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Coupon/Create'));
+const CouponEdit = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Coupon/Edit'));
+const ShowcaseEdit = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Showcase/Edit'));
+const Comments = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Comments/List'));
+const Kvkk = lazy(() => import('../../Pages/Ui/Agreements/Misc/Kvkk'));
+const ConsentText = lazy(() => import('../../Pages/Ui/Agreements/Misc/ConsentText'));
+const TermsOfUse = lazy(() => import('../../Pages/Ui/Agreements/Misc/TermsOfUse'));
+const MyAdvert = lazy(() => import('../../Pages/Ui/UserPanel/Misc/Setting/MyAdvert'));
+const UserReservation = lazy(() => import('../../Pages/Ui/UserPanel/Misc/UserReservation'));
+const UserReviews = lazy(() => import('../../Pages/Ui/UserPanel/Misc/UserReviews'));
+const UserSetting = lazy(() => import('../../Pages/Ui/UserPanel/Misc/UserSetting'));
+const UserFavorites = lazy(() => import('../../Pages/Ui/UserPanel/Misc/UserFavorite'));
+const CouponPage = lazy(() => import('../../Pages/Ui/UserPanel/Misc/CouponPage'));
+const AttrCreate = lazy(() => import("../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Misc/Create"));
+const AttrEdit = lazy(() => import("../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Misc/Edit"));
+const CategoriesList = lazy(() => import("../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Category/List"));
+const NearbyList = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/AdvertContent/Nearby/List'));
+const PostEdit = lazy(() => import("@/Pages/Ui/UserPanel/Crud/PostEdit.jsx"));
+const ReservationManagement = lazy(() => import("../../Pages/Ui/Reservation/ReservationManagement"));
+const HomeRequestsList = lazy(() => import("../../Pages/Ui/UserPanel/SuperAdmin/HomeRequests/List"));
+const SeoList = lazy(() => import("../../Pages/Ui/UserPanel/SuperAdmin/Seo/List"));
+const SeoCreate = lazy(() => import("../../Pages/Ui/UserPanel/SuperAdmin/Seo/Create"));
+const SeoEdit = lazy(() => import("../../Pages/Ui/UserPanel/SuperAdmin/Seo/Edit"));
+const BlogList = lazy(() => import("../../Pages/Ui/UserPanel/SuperAdmin/Blog/List"));
+const BlogCreate = lazy(() => import("../../Pages/Ui/UserPanel/SuperAdmin/Blog/Create"));
+const BlogEdit = lazy(() => import("../../Pages/Ui/UserPanel/SuperAdmin/Blog/Edit"));
+const FaqList = lazy(() => import("@/Pages/Ui/UserPanel/SuperAdmin/Faq/List.jsx"));
+const FaqAdd = lazy(() => import("@/Pages/Ui/UserPanel/SuperAdmin/Faq/Create.jsx"));
+const FaqEdit = lazy(() => import("@/Pages/Ui/UserPanel/SuperAdmin/Faq/Edit.jsx"));
+const FvList = lazy(() => import("@/Pages/Ui/UserPanel/SuperAdmin/Fvpopuler/List.jsx"));
+const FvAdd = lazy(() => import("@/Pages/Ui/UserPanel/SuperAdmin/Fvpopuler/Create.jsx"));
+const FvEdit = lazy(() => import("@/Pages/Ui/UserPanel/SuperAdmin/Fvpopuler/Edit.jsx"));
+const PoliciesList = lazy(() => import("@/Pages/Ui/UserPanel/SuperAdmin/Policies/PoliciesList.jsx"));
+const Reports = lazy(() => import("@/Pages/Ui/UserPanel/SuperAdmin/Reports/Reports.jsx"));
+const SupportTicketList = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/SupportTicket/List'));
+const Dealers = lazy(() => import('../../Pages/Ui/UserPanel/Dealers'));
+const KmPackagesList = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/KmPackages/List'));
+const KmPackagesAdd = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/KmPackages/Create'));
+const KmPackagesEdit = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/KmPackages/Edit'));
+const ReferenceList = lazy(() => import('../../Pages/Ui/UserPanel/SuperAdmin/Reference/List'));
 
 
 // İzin kontrolü için koruma bileşeni
 const ProtectedRoute = ({ children, requiredPermission }) => {
     const user = useSelector(state => state.auth.user);
     const isLoading = useSelector(state => state.auth.loading);
-    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const isAuthChecked = useSelector(state => state.auth.isAuthChecked);
+    const location = useLocation();
 
+    // Oturum kontrolü (/me) bitene kadar bekle; aksi halde sayfa yenilemede girişe atar
+    if (!isAuthChecked || isLoading) {
+        return <Loader/>;
+    }
 
-
+    if (!user) {
+        return <Navigate to={ROUTES.AUTH.LOGIN} state={{ from: location.pathname }} replace />;
+    }
 
     // Yetki kontrolü
     const hasPermission = () => {
-        // Yükleme durumunda loading komponenti göster
-        if (isLoading) {
-            return (
-                <Loader/>
-            );
-        }else {
-            if (!user) {
-                return <Navigate to={ROUTES.AUTH.LOGIN} state={{ from: location.pathname }} replace />;
-            }
-        }
-
         if (!requiredPermission) return true;
 
         switch (requiredPermission) {
@@ -273,6 +272,11 @@ const MainRouter = () => {
                 <Route path={ROUTES.UI.SHOWCASE} element={
                     <ProtectedRoute requiredPermission="super_admin">
                         <Showcase />
+                    </ProtectedRoute>
+                } />
+                <Route path={ROUTES.UI.REFERENCES} element={
+                    <ProtectedRoute requiredPermission="super_admin">
+                        <ReferenceList />
                     </ProtectedRoute>
                 } />
                 <Route path={ROUTES.UI.SHOWCASEEDIT+ '/:id'} element={

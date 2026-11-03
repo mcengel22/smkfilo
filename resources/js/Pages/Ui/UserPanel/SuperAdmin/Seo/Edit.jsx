@@ -57,7 +57,7 @@ const SeoEdit = () => {
                 }
 
                 if (data.image) {
-                    const base = import.meta.env.APP_URL;
+                    const base = window.location.origin;
                     const imgUrl = data.image.startsWith("http")
                         ? data.image
                         : `${base.replace(/\/$/, "")}${

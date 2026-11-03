@@ -3,13 +3,12 @@ import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import FilterCard from "./FilterCard";
 import { ATTRS } from "../../../../Libs/Global/attrs";
-import { usePost } from "../../../../ServerSide/Hooks/usePost";
 import { resetFilters, updateFilters } from "../../../../Repo/Redux/Modules/FilterSlice";
-import { isEmpty } from "lodash";
+// package.json'da olmayan lodash yerine
+const isEmpty = (obj) => !obj || Object.keys(obj).length === 0;
 
 const Sidebar = () => {
     const { t } = useTranslation();
-    const { setPostsByFilter, setPosts } = usePost();
     const dispatch = useDispatch();
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -56,25 +55,21 @@ const Sidebar = () => {
         };
     }, []);
 
-    const getPostwFilter = async () => {
+    // Filtre değişince 1. sayfadan başla. Listing sayfası pagination değişimini dinleyip
+    // ilanları tek istekle yeniden çekiyor.
+    const getPostwFilter = () => {
         if (isEmpty(filter.filters)) return;
-        try {
-            window.scrollTo(0, 0);
-            await setPostsByFilter(filter.filters);
-        } catch (error) {
-            console.error(error);
-        }
+        window.scrollTo(0, 0);
+        dispatch(updateFilters({ pagination: { pageNumber: 1 } }));
+        closeSidebar();
     };
 
-    const clearPostFilter = async () => {
+    const clearPostFilter = () => {
         if (isEmpty(filter.filters)) return;
-        try {
-            window.scrollTo(0, 0);
-            await dispatch(resetFilters());
-            setPostsByFilter(null);
-        } catch (err) {
-            console.error("Filter temizleme hatası:", err);
-        }
+        window.scrollTo(0, 0);
+        dispatch(resetFilters());
+        dispatch(updateFilters({ pagination: { pageNumber: 1 } }));
+        closeSidebar();
     };
 
     const handleInputChange = (name, value) => {
@@ -134,6 +129,7 @@ const Sidebar = () => {
                                     placeholder={t("Araç adı ile ara")}
                                     value={filter.filters.search ?? ""}
                                     onChange={(e) => handleSearchChange(e.target.value)}
+                                    onKeyDown={(e) => e.key === "Enter" && getPostwFilter()}
                                 />
                                 <button
                                     type="button"

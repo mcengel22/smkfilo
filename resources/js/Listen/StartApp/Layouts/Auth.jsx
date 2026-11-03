@@ -54,7 +54,9 @@ const AuthLayout = () => {
             <div className="auth">
                 <div className="card">
                     <div className="card-container">
-                        <Outlet />
+                        <React.Suspense fallback={null}>
+                            <Outlet />
+                        </React.Suspense>
                     </div>
                 </div>
             </div>

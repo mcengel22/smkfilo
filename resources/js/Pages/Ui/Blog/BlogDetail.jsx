@@ -36,11 +36,11 @@ const BlogDetail = () => {
 
     useEffect(() => {
         if (blog) {
-            const baseUrl = import.meta.env.APP_URL;
+            const baseUrl = window.location.origin;
             const imageUrl =
                 blog.image && blog.image.startsWith("http")
                     ? blog.image
-                    : npm`${baseUrl.replace(/\/$/, "")}${blog.image?.startsWith("/") ? "" : "/"}${blog.image || ""}`;
+                    : `${baseUrl.replace(/\/$/, "")}${blog.image?.startsWith("/") ? "" : "/"}${blog.image || ""}`;
 
             setSeoData({
                 meta_title: blog.title || FALLBACK_SEO.meta_title,

@@ -52,11 +52,18 @@ class PostCardResource extends JsonResource
         $isFavorite = false;
 
         if ($user) {
-            $isFavorite = DB::table('favorites')
-                ->where('user_id', $user->id)
-                ->where('post_id', $this->id)
-                ->whereNull('deleted_at')
-                ->exists();
+            // Kullanıcının favorileri istek başına bir kez çekilir (her kart için ayrı sorgu yerine)
+            $favoriteIds = $request->attributes->get('favorite_post_ids');
+            if ($favoriteIds === null) {
+                $favoriteIds = DB::table('favorites')
+                    ->where('user_id', $user->id)
+                    ->whereNull('deleted_at')
+                    ->pluck('post_id')
+                    ->flip()
+                    ->all();
+                $request->attributes->set('favorite_post_ids', $favoriteIds);
+            }
+            $isFavorite = isset($favoriteIds[$this->id]);
         }
 
         return [

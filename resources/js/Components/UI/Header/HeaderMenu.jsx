@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ROUTES } from "../../../Libs/Routes/config";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
+import { loadSwal } from "@/Libs/Global/swal.js";
 import { toast } from "react-toastify";
 import { useAuth } from "../../../ServerSide/Hooks/Auth/useAuth";
 import Select from "react-dropdown-select";
@@ -62,7 +62,7 @@ const HeaderMenu = ({
     };
 
     const handleLogout = async () => {
-        const result = await Swal.fire({
+        const result = await (await loadSwal()).fire({
             title: t("Emin misiniz?"),
             text: t("Çıkış yapmak üzeresiniz."),
             icon: "warning",
@@ -77,7 +77,7 @@ const HeaderMenu = ({
                 toast.success(t("Çıkış yapıldı 👋"));
             } catch (error) {
                 console.error("Çıkış hatası:", error);
-                Swal.fire(t("Hata"), t("Çıkış yapılamadı!"), "error");
+                (await loadSwal()).fire(t("Hata"), t("Çıkış yapılamadı!"), "error");
             }
         }
     };

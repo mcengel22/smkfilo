@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { Suspense } from "react";
+import Loader from "../../../Components/Loader";
 import TopHeader from "./Misc/TopHeader";
 import { Link, Outlet } from "react-router-dom";
 import Footer from "./Misc/Footer";
@@ -120,7 +121,9 @@ const PanelLayout = () => {
                                         {/*</li>*/}
                                     </ul>
                                 </div>
-                                <Outlet />
+                                <Suspense fallback={<Loader />}>
+                                    <Outlet />
+                                </Suspense>
                             </div>
                         </div>
                     </div>

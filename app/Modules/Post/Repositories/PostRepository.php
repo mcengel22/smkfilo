@@ -50,10 +50,12 @@ class PostRepository
     {
         return Post::with([
             'media',
-            'region',
-            'comments',
+            'region.parentCity',
+            // Sadece onaylanmış yorumlar gösterilir / puana dahil edilir
+            'comments' => fn ($q) => $q->where('status', 'approved'),
             'details',
-            'postHasAttrs.attr', // 🔥 attr'ı da yükle yoksa hep null döner
+            'postHasAttrs.attr.infoRelation', // 🔥 attr'ı da yükle yoksa hep null döner
+            'postHasAttrs.attr.media',
             'postGalleries.images.media', // 💥 Galeriyi ve görselleri çekiyoruz!
         ])->where('slug', $slug)->firstOrFail();
     }
@@ -90,7 +92,7 @@ class PostRepository
 
     public function filter(array $filters, string $orderBy = 'id', string $orderDirection = 'desc')
     {
-        $query = Post::query();
+        $query = Post::query()->withCardRelations();
 
         // 🔍 Özellik filtreleri
         if (!empty($filters['attrs'])) {

@@ -84,7 +84,7 @@ class FilterPostRequest extends FormRequest
             'sort.by' => ['nullable', OrderBy::toRule()],
             'sort.direction' => ['nullable', OrderDirection::toRule()],
 
-            'pagination.perPage' => ['nullable', 'integer', 'min:1'],
+            'pagination.perPage' => ['nullable', 'integer', 'min:1', 'max:100'],
             'pagination.pageNumber' => ['nullable', 'integer', 'min:1'],
         ];
     }

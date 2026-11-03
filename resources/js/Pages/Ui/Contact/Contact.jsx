@@ -130,8 +130,8 @@ const Contact = () => {
                                         {t("Telefon Numarası")}
                                     </div>
                                     <div className="flex flex-col">
-                                        <a href="tel:+905555555555">
-                                            +90 555 555 55 55
+                                        <a href="tel:+905305421233">
+                                            +90 530 542 12 33
                                         </a>
                                     </div>
                                 </div>
@@ -143,8 +143,8 @@ const Contact = () => {
                                         <i className="icon call"></i>
                                         {t("Müşteri Hizmetleri")}
                                     </div>
-                                    <a href="tel:+905555555555">
-                                        +90 555 555 55 55
+                                    <a href="tel:+905305421233">
+                                        +90 530 542 12 33
                                     </a>
                                 </div>
                             </div>

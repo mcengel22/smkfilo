@@ -37,7 +37,7 @@ function LocationCard({data}) {
   return (
     <div
       className="destination-list background-image"
-      style={{ backgroundImage: `url(/img/banner/rentacar.png)` }}
+      style={{ backgroundImage: `url(/img/banner/rentacar.webp)` }}
 >
       <div className="destination-content">
         <h4 className="box-title">{data?.region?.name}</h4>
