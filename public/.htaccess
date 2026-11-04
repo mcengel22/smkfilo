@@ -5,6 +5,10 @@
 
     RewriteEngine On
 
+    # www'lu adresi tek adrese (https://smkfilo.com.tr) yönlendir: Google'da çift kayıt olmasın
+    RewriteCond %{HTTP_HOST} ^www\.smkfilo\.com\.tr$ [NC]
+    RewriteRule ^ https://smkfilo.com.tr%{REQUEST_URI} [L,R=301]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

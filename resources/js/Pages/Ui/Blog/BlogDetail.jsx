@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useBlog } from "../../../ServerSide/Hooks/useBlog";
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
+import { withBrand } from "../../../Libs/Global/seo";
 
 const BlogDetail = () => {
     const { t } = useTranslation();
@@ -51,7 +52,8 @@ const BlogDetail = () => {
                 keywords: Array.isArray(blog.keywords)
                     ? blog.keywords.join(", ")
                     : blog.keywords || FALLBACK_SEO.keywords,
-                canonical_url: blog.canonical_url || FALLBACK_SEO.canonical_url,
+                // Kanonik adres sunucudan geliyor; sadece blogda özel girilmişse ezilir
+                canonical_url: blog.canonical_url || null,
                 image: imageUrl || FALLBACK_SEO.image,
             });
         }
@@ -70,29 +72,33 @@ const BlogDetail = () => {
             {/* 🔹 META TAGLAR */}
             {seoData && (
                 <Helmet>
-                    <title>{seoData.meta_title}</title>
+                    <title>{withBrand(seoData.meta_title)}</title>
                     <meta
                         name="description"
                         content={seoData.meta_description}
                     />
                     <meta name="keywords" content={seoData.keywords} />
-                    <link rel="canonical" href={seoData.canonical_url} />
+                    {seoData.canonical_url && (
+                        <link rel="canonical" href={seoData.canonical_url} />
+                    )}
 
                     {/* Open Graph */}
-                    <meta property="og:title" content={seoData.meta_title} />
+                    <meta property="og:title" content={withBrand(seoData.meta_title)} />
                     <meta
                         property="og:description"
                         content={seoData.meta_description}
                     />
                     <meta property="og:type" content="article" />
-                    <meta property="og:url" content={seoData.canonical_url} />
+                    {seoData.canonical_url && (
+                        <meta property="og:url" content={seoData.canonical_url} />
+                    )}
                     {seoData.image && (
                         <meta property="og:image" content={seoData.image} />
                     )}
 
                     {/* Twitter Card */}
                     <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:title" content={seoData.meta_title} />
+                    <meta name="twitter:title" content={withBrand(seoData.meta_title)} />
                     <meta
                         name="twitter:description"
                         content={seoData.meta_description}

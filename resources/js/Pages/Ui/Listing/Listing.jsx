@@ -14,6 +14,7 @@ import SkeletonListing from "./SkeletonListing";
 import { updateFilters } from "../../../Repo/Redux/Modules/FilterSlice";
 import { useSeo } from "../../../ServerSide/Hooks/useSeo";
 import { Helmet } from "react-helmet-async";
+import { withBrand } from "../../../Libs/Global/seo";
 
 const Listing = () => {
     const dispatch = useDispatch();
@@ -119,11 +120,12 @@ const Listing = () => {
     // 🔁 SEO datası değişince meta fallback
     useEffect(() => {
         if (seoData?.meta_title) {
-            document.title = replaceBolge(seoData.meta_title);
+            document.title = withBrand(replaceBolge(seoData.meta_title));
 
             const descContent = replaceBolge(seoData.meta_description || "");
             const keywordsContent = replaceBolge(seoData.keywords || "");
-            const canonicalUrl = seoData.canonical_url || window.location.href;
+            // Kanonik adres sunucudan geliyor; sadece panelde özel girilmişse ezilir
+            const canonicalUrl = seoData.canonical_url;
 
             // description
             let desc = document.querySelector("meta[name='description']");
@@ -144,13 +146,15 @@ const Listing = () => {
             keys.content = keywordsContent;
 
             // canonical
-            let canonical = document.querySelector("link[rel='canonical']");
-            if (!canonical) {
-                canonical = document.createElement("link");
-                canonical.rel = "canonical";
-                document.head.appendChild(canonical);
+            if (canonicalUrl) {
+                let canonical = document.querySelector("link[rel='canonical']");
+                if (!canonical) {
+                    canonical = document.createElement("link");
+                    canonical.rel = "canonical";
+                    document.head.appendChild(canonical);
+                }
+                canonical.href = canonicalUrl;
             }
-            canonical.href = canonicalUrl;
 
             // OG tags
             const ogTags = [
@@ -210,10 +214,12 @@ const Listing = () => {
                         }
                     >
                         <title>
-                            {replaceBolge(
-                                seoData.meta_title ||
-                                    seoData.main_title ||
-                                    "Renta Car - Araç Kiralama",
+                            {withBrand(
+                                replaceBolge(
+                                    seoData.meta_title ||
+                                        seoData.main_title ||
+                                        "Kiralık Araçlar",
+                                ),
                             )}
                         </title>
 
@@ -233,26 +239,22 @@ const Listing = () => {
                             />
                         )}
 
-                        <link
-                            rel="canonical"
-                            href={seoData.canonical_url || window.location.href}
-                        />
+                        {seoData.canonical_url && (
+                            <link rel="canonical" href={seoData.canonical_url} />
+                        )}
 
                         {/* 🔹 Open Graph Meta */}
                         <meta
                             property="og:title"
-                            content={replaceBolge(seoData.meta_title)}
+                            content={withBrand(replaceBolge(seoData.meta_title))}
                         />
                         <meta
                             property="og:description"
                             content={replaceBolge(seoData.meta_description)}
                         />
-                        <meta
-                            property="og:url"
-                            content={
-                                seoData.canonical_url || window.location.href
-                            }
-                        />
+                        {seoData.canonical_url && (
+                            <meta property="og:url" content={seoData.canonical_url} />
+                        )}
                         {seoData.image && (
                             <meta property="og:image" content={seoData.image} />
                         )}

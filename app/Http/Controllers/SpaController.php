@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\SeoResolver;
+use App\Services\SeoContentBuilder;
 
 class SpaController extends Controller
 {
-    public function index(Request $request, SeoResolver $resolver)
+    public function index(Request $request, SeoResolver $resolver, SeoContentBuilder $contentBuilder)
     {
         // URL path (örn: "", "Ilanlar", "Kampanyalar")
         $path = $request->path() === '/' ? '' : $request->path();
@@ -30,6 +31,9 @@ class SpaController extends Controller
         // 🔹 SEO'yu çöz
         $initialSeo = $resolver->resolveType($type, $currentUrl);
 
-        return view('app', ['initialSeo' => $initialSeo]);
+        // 🔹 Ham HTML'de görünecek sayfa içeriği (arama motorları için)
+        $seoContent = $contentBuilder->build(trim(rawurldecode($path), '/'), $initialSeo);
+
+        return view('app', ['initialSeo' => $initialSeo, 'seoContent' => $seoContent]);
     }
 }

@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use App\Modules\Blog\Models\Blog;
 use App\Modules\Post\Models\Post;
 use Illuminate\Support\Facades\Response;
+use App\Services\SeoResolver;
 use Carbon\Carbon;
 
 class SitemapController extends Controller
 {
     public function index()
     {
+        $now = Carbon::now()->toAtomString();
+
         $sitemaps = [
-            ['loc' => url('/sitemaps/static'), 'lastmod' => Carbon::now()->toAtomString()],
-            ['loc' => url('/sitemaps/blogs'), 'lastmod' => Blog::latest('updated_at')->value('updated_at') ?? Carbon::now()->toAtomString()],
-            ['loc' => url('/sitemaps/ilanlar'), 'lastmod' => Post::latest('updated_at')->value('updated_at') ?? Carbon::now()->toAtomString()],
-            ['loc' => url('/sitemaps/iletisim'), 'lastmod' => Carbon::now()->toAtomString()], // ✅ iletişim sitemap
+            ['loc' => $this->link('/sitemaps/static'), 'lastmod' => $now],
+            ['loc' => $this->link('/sitemaps/blogs'), 'lastmod' => $this->lastmod(Blog::max('updated_at'))],
+            ['loc' => $this->link('/sitemaps/ilanlar'), 'lastmod' => $this->lastmod(Post::where('status', 1)->max('updated_at'))],
+            ['loc' => $this->link('/sitemaps/iletisim'), 'lastmod' => $now],
         ];
 
         return Response::view('sitemaps.index', compact('sitemaps'))
@@ -24,11 +27,15 @@ class SitemapController extends Controller
 
     public function static()
     {
-        $urls = [
-            ['loc' => url('/'), 'lastmod' => Carbon::now()->toAtomString()],
-            ['loc' => url('/Ilanlar'), 'lastmod' => Carbon::now()->toAtomString()],
-            ['loc' => url('/blog'), 'lastmod' => Carbon::now()->toAtomString()],
-        ];
+        $now = Carbon::now()->toAtomString();
+
+        // React tarafındaki gerçek route'lar (resources/js/Libs/Routes/config.jsx)
+        $urls = collect([
+            '/', '/Ilanlar', '/Blog/Listing', '/Campaign/Listing', '/Hakkimizda', '/Kurumsal',
+            '/Sozlesmeler/KiralikSozlesmesi', '/Sozlesmeler/IptalSartlari',
+            '/Sozlesmeler/GizlilikSozlesmesi', '/Sozlesmeler/KisiselVerilerinKorunmasi',
+            '/Sozlesmeler/KullanimSartlari',
+        ])->map(fn($path) => ['loc' => $this->link($path), 'lastmod' => $now]);
 
         return Response::view('sitemaps.urls', compact('urls'))
             ->header('Content-Type', 'application/xml');
@@ -36,9 +43,9 @@ class SitemapController extends Controller
 
     public function blogs()
     {
-        $urls = Blog::all()->map(fn($b) => [
-            'loc' => url("/blog/{$b->slug}"),
-            'lastmod' => $b->updated_at?->toAtomString() ?? Carbon::now()->toAtomString(),
+        $urls = Blog::select('slug', 'updated_at')->get()->map(fn($b) => [
+            'loc' => $this->link('/Blog/Detay/' . rawurlencode($b->slug)),
+            'lastmod' => $this->lastmod($b->updated_at),
         ]);
 
         return Response::view('sitemaps.urls', ['urls' => $urls])
@@ -47,9 +54,10 @@ class SitemapController extends Controller
 
     public function ilanlar()
     {
-        $urls = Post::all()->map(fn($p) => [
-            'loc' => url("/Detay/{$p->slug}"),
-            'lastmod' => $p->updated_at?->toAtomString() ?? Carbon::now()->toAtomString(),
+        // Sadece yayındaki ilanlar
+        $urls = Post::where('status', 1)->select('slug', 'updated_at')->get()->map(fn($p) => [
+            'loc' => $this->link('/Detay/' . rawurlencode($p->slug)),
+            'lastmod' => $this->lastmod($p->updated_at),
         ]);
 
         return Response::view('sitemaps.urls', ['urls' => $urls])
@@ -58,12 +66,23 @@ class SitemapController extends Controller
 
     public function iletisim()
     {
-        // 🔥 sadece tek bir sayfa: /İletisim
+        // Route "/İletisim" (Türkçe İ) — sitemap'te URL-encode edilmiş olmalı
         $urls = [
-            ['loc' => url('/İletisim'), 'lastmod' => Carbon::now()->toAtomString()],
+            ['loc' => $this->link('/' . rawurlencode('İletisim')), 'lastmod' => Carbon::now()->toAtomString()],
         ];
 
         return Response::view('sitemaps.urls', compact('urls'))
             ->header('Content-Type', 'application/xml');
+    }
+
+    // Sitemap linkleri her zaman www'suz tek adresle
+    private function link(string $path): string
+    {
+        return SeoResolver::baseUrl() . ($path === '/' ? '/' : $path);
+    }
+
+    private function lastmod($date): string
+    {
+        return $date ? Carbon::parse($date)->toAtomString() : Carbon::now()->toAtomString();
     }
 }
